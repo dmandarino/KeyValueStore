@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5A7056D029CB8C3500034264 /* KVStoreStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7056CF29CB8C3500034264 /* KVStoreStatus.swift */; };
+		5A7056D429CBB1BF00034264 /* KVSExamplesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7056D329CBB1BF00034264 /* KVSExamplesTests.swift */; };
 		5A7C940729CB6BD200F2B631 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7C940629CB6BD200F2B631 /* AppDelegate.swift */; };
 		5A7C940929CB6BD200F2B631 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7C940829CB6BD200F2B631 /* SceneDelegate.swift */; };
 		5A7C940B29CB6BD200F2B631 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7C940A29CB6BD200F2B631 /* ContentView.swift */; };
@@ -41,6 +42,7 @@
 
 /* Begin PBXFileReference section */
 		5A7056CF29CB8C3500034264 /* KVStoreStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KVStoreStatus.swift; sourceTree = "<group>"; };
+		5A7056D329CBB1BF00034264 /* KVSExamplesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KVSExamplesTests.swift; sourceTree = "<group>"; };
 		5A7C940329CB6BD200F2B631 /* KeyValueStore.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KeyValueStore.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A7C940629CB6BD200F2B631 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5A7C940829CB6BD200F2B631 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -86,11 +88,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		5A7056CE29CB8BEB00034264 /* Foundation */ = {
+		5A7056D229CBB12800034264 /* Foundation */ = {
 			isa = PBXGroup;
 			children = (
+				5A7C940629CB6BD200F2B631 /* AppDelegate.swift */,
+				5A7C940C29CB6BD800F2B631 /* Assets.xcassets */,
+				5A7C941129CB6BD800F2B631 /* LaunchScreen.storyboard */,
+				5A7C941429CB6BD800F2B631 /* Info.plist */,
 			);
-			path = Foundation;
+			name = Foundation;
 			sourceTree = "<group>";
 		};
 		5A7C93FA29CB6BD200F2B631 = {
@@ -116,15 +122,11 @@
 		5A7C940529CB6BD200F2B631 /* KeyValueStore */ = {
 			isa = PBXGroup;
 			children = (
-				5A7056CE29CB8BEB00034264 /* Foundation */,
 				5A7C944229CB7EFC00F2B631 /* Helper */,
 				5A7C943629CB6C6600F2B631 /* Store */,
-				5A7C940629CB6BD200F2B631 /* AppDelegate.swift */,
 				5A7C940829CB6BD200F2B631 /* SceneDelegate.swift */,
 				5A7C940A29CB6BD200F2B631 /* ContentView.swift */,
-				5A7C940C29CB6BD800F2B631 /* Assets.xcassets */,
-				5A7C941129CB6BD800F2B631 /* LaunchScreen.storyboard */,
-				5A7C941429CB6BD800F2B631 /* Info.plist */,
+				5A7056D229CBB12800034264 /* Foundation */,
 				5A7C940E29CB6BD800F2B631 /* Preview Content */,
 			);
 			path = KeyValueStore;
@@ -143,6 +145,7 @@
 			children = (
 				5A7C941F29CB6BD800F2B631 /* Info.plist */,
 				5A7C943F29CB774000F2B631 /* Store */,
+				5A7056D329CBB1BF00034264 /* KVSExamplesTests.swift */,
 			);
 			path = KeyValueStoreTests;
 			sourceTree = "<group>";
@@ -330,6 +333,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5A7C943E29CB726B00F2B631 /* KVStoreServiceTests.swift in Sources */,
+				5A7056D429CBB1BF00034264 /* KVSExamplesTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
