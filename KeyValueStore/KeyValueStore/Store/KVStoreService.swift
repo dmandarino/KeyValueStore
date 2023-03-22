@@ -10,6 +10,7 @@ import Foundation
 
 public protocol KVStoreServicing {
     @discardableResult func set(key: String, value: String) -> Result<Void, KVStoreError>
+    @discardableResult func delete(key: String) -> Result<Void, KVStoreError>
     func get(key: String) -> Result<String, KVStoreError>
 }
 
@@ -21,7 +22,7 @@ final class KVStoreService: KVStoreServicing {
         self.kvStore = store
     }
     
-    @discardableResult func set(key: String, value: String) -> Result<Void, KVStoreError> {
+    func set(key: String, value: String) -> Result<Void, KVStoreError> {
         guard key.isNotEmpty else {
             return .failure(.emptyKey)
         }
@@ -34,5 +35,15 @@ final class KVStoreService: KVStoreServicing {
             return .success(value)
         }
         return .failure(.keyNotFound)
+    }
+    
+    func delete(key: String) -> Result<Void, KVStoreError> {
+        guard key.isNotEmpty else {
+            return .failure(.emptyKey)
+        }
+        guard kvStore.store.removeValue(forKey: key) != nil else {
+            return .failure(.keyNotFound)
+        }
+        return .success(())
     }
 }

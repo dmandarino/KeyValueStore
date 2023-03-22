@@ -89,7 +89,7 @@ class KVStoreServiceTests: XCTestCase {
         XCTAssertEqual(store.store, ["foo":"123"])
 
         //When
-        service?.set(key: "foo", value: "abc")
+        _ = service?.set(key: "foo", value: "abc")
         status = service?.get(key: "foo")
 
         //Then
@@ -112,6 +112,68 @@ class KVStoreServiceTests: XCTestCase {
         
         //When
         status = service?.get(key: "bar")
+        
+        //Then
+        switch status {
+        case .failure(let error):
+            result = error
+        default:
+            XCTFail()
+        }
+        XCTAssertEqual(result, KVStoreError.keyNotFound)
+    }
+    
+    //MARK: - DELETE
+    
+    func test_deleteValueByKey_shouldDeleteTheKeyAndReturnSuccess() {
+        //Given
+        var status: Result<Void, KVStoreError>?
+        store = KVStore(store: ["foo":"123", "bar":"456"])
+        service = KVStoreService(store: store)
+        
+        //When
+        status = service?.delete(key: "foo")
+        
+        //Then
+        switch status {
+        case .success():
+            break
+        default:
+            XCTFail()
+        }
+        XCTAssertNil(store.store["foo"])
+    }
+    
+    func test_deleteValueWhenKeyIsEmpty_shouldReturnFail() {
+        //Given
+        var status: Result<Void, KVStoreError>?
+        var result: KVStoreError? = .none
+        store = KVStore(store: ["foo":"123", "bar":"456"])
+        service = KVStoreService(store: store)
+        
+        //When
+        status = service?.delete(key: "")
+        
+        //Then
+        switch status {
+        case .failure(let error):
+            result = error
+        default:
+            XCTFail()
+        }
+        XCTAssertEqual(result, KVStoreError.emptyKey)
+    }
+    
+    
+    func test_deleteValueWhenThereIsNoKey_shouldReturnFail() {
+        //Given
+        var status: Result<Void, KVStoreError>?
+        var result: KVStoreError? = .none
+        store = KVStore(store: ["foo":"123", "bar":"456"])
+        service = KVStoreService(store: store)
+        
+        //When
+        status = service?.delete(key: "beta")
         
         //Then
         switch status {
