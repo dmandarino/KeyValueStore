@@ -7,18 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5A7056D029CB8C3500034264 /* KVStoreStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7056CF29CB8C3500034264 /* KVStoreStatus.swift */; };
 		5A7C940729CB6BD200F2B631 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7C940629CB6BD200F2B631 /* AppDelegate.swift */; };
 		5A7C940929CB6BD200F2B631 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7C940829CB6BD200F2B631 /* SceneDelegate.swift */; };
 		5A7C940B29CB6BD200F2B631 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7C940A29CB6BD200F2B631 /* ContentView.swift */; };
 		5A7C940D29CB6BD800F2B631 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5A7C940C29CB6BD800F2B631 /* Assets.xcassets */; };
 		5A7C941029CB6BD800F2B631 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5A7C940F29CB6BD800F2B631 /* Preview Assets.xcassets */; };
 		5A7C941329CB6BD800F2B631 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5A7C941129CB6BD800F2B631 /* LaunchScreen.storyboard */; };
-		5A7C941E29CB6BD800F2B631 /* KeyValueStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7C941D29CB6BD800F2B631 /* KeyValueStoreTests.swift */; };
 		5A7C942929CB6BD800F2B631 /* KeyValueStoreUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7C942829CB6BD800F2B631 /* KeyValueStoreUITests.swift */; };
 		5A7C943829CB6D3B00F2B631 /* KVStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7C943729CB6D3B00F2B631 /* KVStore.swift */; };
 		5A7C943A29CB6DD200F2B631 /* KVStoreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7C943929CB6DD200F2B631 /* KVStoreService.swift */; };
 		5A7C943C29CB707200F2B631 /* KVStoreBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7C943B29CB707200F2B631 /* KVStoreBuilder.swift */; };
 		5A7C943E29CB726B00F2B631 /* KVStoreServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7C943D29CB726B00F2B631 /* KVStoreServiceTests.swift */; };
+		5A7C944429CB7F1100F2B631 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7C944329CB7F1100F2B631 /* StringExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,6 +40,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5A7056CF29CB8C3500034264 /* KVStoreStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KVStoreStatus.swift; sourceTree = "<group>"; };
 		5A7C940329CB6BD200F2B631 /* KeyValueStore.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KeyValueStore.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A7C940629CB6BD200F2B631 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5A7C940829CB6BD200F2B631 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -48,7 +50,6 @@
 		5A7C941229CB6BD800F2B631 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5A7C941429CB6BD800F2B631 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5A7C941929CB6BD800F2B631 /* KeyValueStoreTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KeyValueStoreTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		5A7C941D29CB6BD800F2B631 /* KeyValueStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyValueStoreTests.swift; sourceTree = "<group>"; };
 		5A7C941F29CB6BD800F2B631 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5A7C942429CB6BD800F2B631 /* KeyValueStoreUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KeyValueStoreUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A7C942829CB6BD800F2B631 /* KeyValueStoreUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyValueStoreUITests.swift; sourceTree = "<group>"; };
@@ -57,6 +58,7 @@
 		5A7C943929CB6DD200F2B631 /* KVStoreService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KVStoreService.swift; sourceTree = "<group>"; };
 		5A7C943B29CB707200F2B631 /* KVStoreBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KVStoreBuilder.swift; sourceTree = "<group>"; };
 		5A7C943D29CB726B00F2B631 /* KVStoreServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KVStoreServiceTests.swift; sourceTree = "<group>"; };
+		5A7C944329CB7F1100F2B631 /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +86,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5A7056CE29CB8BEB00034264 /* Foundation */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Foundation;
+			sourceTree = "<group>";
+		};
 		5A7C93FA29CB6BD200F2B631 = {
 			isa = PBXGroup;
 			children = (
@@ -107,6 +116,8 @@
 		5A7C940529CB6BD200F2B631 /* KeyValueStore */ = {
 			isa = PBXGroup;
 			children = (
+				5A7056CE29CB8BEB00034264 /* Foundation */,
+				5A7C944229CB7EFC00F2B631 /* Helper */,
 				5A7C943629CB6C6600F2B631 /* Store */,
 				5A7C940629CB6BD200F2B631 /* AppDelegate.swift */,
 				5A7C940829CB6BD200F2B631 /* SceneDelegate.swift */,
@@ -130,9 +141,8 @@
 		5A7C941C29CB6BD800F2B631 /* KeyValueStoreTests */ = {
 			isa = PBXGroup;
 			children = (
-				5A7C941D29CB6BD800F2B631 /* KeyValueStoreTests.swift */,
 				5A7C941F29CB6BD800F2B631 /* Info.plist */,
-				5A7C943D29CB726B00F2B631 /* KVStoreServiceTests.swift */,
+				5A7C943F29CB774000F2B631 /* Store */,
 			);
 			path = KeyValueStoreTests;
 			sourceTree = "<group>";
@@ -152,8 +162,25 @@
 				5A7C943729CB6D3B00F2B631 /* KVStore.swift */,
 				5A7C943929CB6DD200F2B631 /* KVStoreService.swift */,
 				5A7C943B29CB707200F2B631 /* KVStoreBuilder.swift */,
+				5A7056CF29CB8C3500034264 /* KVStoreStatus.swift */,
 			);
 			path = Store;
+			sourceTree = "<group>";
+		};
+		5A7C943F29CB774000F2B631 /* Store */ = {
+			isa = PBXGroup;
+			children = (
+				5A7C943D29CB726B00F2B631 /* KVStoreServiceTests.swift */,
+			);
+			path = Store;
+			sourceTree = "<group>";
+		};
+		5A7C944229CB7EFC00F2B631 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				5A7C944329CB7F1100F2B631 /* StringExtension.swift */,
+			);
+			path = Helper;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -287,8 +314,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5A7056D029CB8C3500034264 /* KVStoreStatus.swift in Sources */,
 				5A7C943C29CB707200F2B631 /* KVStoreBuilder.swift in Sources */,
 				5A7C943A29CB6DD200F2B631 /* KVStoreService.swift in Sources */,
+				5A7C944429CB7F1100F2B631 /* StringExtension.swift in Sources */,
 				5A7C940729CB6BD200F2B631 /* AppDelegate.swift in Sources */,
 				5A7C940929CB6BD200F2B631 /* SceneDelegate.swift in Sources */,
 				5A7C943829CB6D3B00F2B631 /* KVStore.swift in Sources */,
@@ -301,7 +330,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				5A7C943E29CB726B00F2B631 /* KVStoreServiceTests.swift in Sources */,
-				5A7C941E29CB6BD800F2B631 /* KeyValueStoreTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

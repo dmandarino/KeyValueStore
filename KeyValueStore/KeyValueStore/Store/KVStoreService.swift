@@ -9,8 +9,8 @@
 import Foundation
 
 public protocol KVStoreServicing {
-    func set(key: String, value: String)
-    func get(key: String) -> String?
+    @discardableResult func set(key: String, value: String) -> Result<Void, KVStoreError>
+    func get(key: String) -> Result<String, KVStoreError>
 }
 
 final class KVStoreService: KVStoreServicing {
@@ -21,11 +21,18 @@ final class KVStoreService: KVStoreServicing {
         self.kvStore = store
     }
     
-    func set(key: String, value: String) {
+    @discardableResult func set(key: String, value: String) -> Result<Void, KVStoreError> {
+        guard key.isNotEmpty else {
+            return .failure(.emptyKey)
+        }
         kvStore.store[key] = value
+        return .success(())
     }
     
-    func get(key: String) -> String? {
-        return kvStore.store[key]
+    func get(key: String) -> Result<String, KVStoreError> {
+        if let value = kvStore.store[key] {
+            return .success(value)
+        }
+        return .failure(.keyNotFound)
     }
 }
