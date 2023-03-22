@@ -99,6 +99,22 @@
 			name = Foundation;
 			sourceTree = "<group>";
 		};
+		5A7056D529CBB42B00034264 /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				5A7056D629CBB43B00034264 /* Stack */,
+				5A7C943629CB6C6600F2B631 /* Store */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
+		5A7056D629CBB43B00034264 /* Stack */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Stack;
+			sourceTree = "<group>";
+		};
 		5A7C93FA29CB6BD200F2B631 = {
 			isa = PBXGroup;
 			children = (
@@ -122,8 +138,8 @@
 		5A7C940529CB6BD200F2B631 /* KeyValueStore */ = {
 			isa = PBXGroup;
 			children = (
+				5A7056D529CBB42B00034264 /* Features */,
 				5A7C944229CB7EFC00F2B631 /* Helper */,
-				5A7C943629CB6C6600F2B631 /* Store */,
 				5A7C940829CB6BD200F2B631 /* SceneDelegate.swift */,
 				5A7C940A29CB6BD200F2B631 /* ContentView.swift */,
 				5A7056D229CBB12800034264 /* Foundation */,
