@@ -144,7 +144,7 @@ class KVStoreServiceTests: XCTestCase {
         XCTAssertNil(store.store["foo"])
     }
     
-    func test_deleteValueWhenKeyIsEmpty_shouldReturnFail() {
+    func test_deleteValueWhenKeyIsEmpty_shouldFail() {
         //Given
         var status: Result<Void, KVStoreError>?
         var result: KVStoreError? = .none
@@ -165,7 +165,7 @@ class KVStoreServiceTests: XCTestCase {
     }
     
     
-    func test_deleteValueWhenThereIsNoKey_shouldReturnFail() {
+    func test_deleteValueWhenThereIsNoKey_shouldFail() {
         //Given
         var status: Result<Void, KVStoreError>?
         var result: KVStoreError? = .none
@@ -183,5 +183,87 @@ class KVStoreServiceTests: XCTestCase {
             XCTFail()
         }
         XCTAssertEqual(result, KVStoreError.keyNotFound)
+    }
+    
+    //MARK: - COUNT
+    
+    func test_countValueOneValue_shouldReturnNumberOfMatchedValue() {
+        //Given
+        var status: Result<Int, KVStoreError>?
+        var result = 0
+        store = KVStore(store: ["foo":"123", "bar":"456", "blz":"abc", "xpto":"456"])
+        service = KVStoreService(store: store)
+        
+        //When
+        status = service?.count(value: "abc")
+        
+        //Then
+        switch status {
+        case .success(let value):
+            result = value
+        default:
+            XCTFail()
+        }
+        XCTAssertEqual(result, 1)
+    }
+    
+    func test_countValueWhenBiggerThanOne_shouldReturnNumberOfMatchedValue() {
+        //Given
+        var status: Result<Int, KVStoreError>?
+        var result = 0
+        store = KVStore(store: ["foo":"123", "bar":"456", "blz":"abc", "xpto":"456"])
+        service = KVStoreService(store: store)
+        
+        //When
+        status = service?.count(value: "456")
+        
+        //Then
+        switch status {
+        case .success(let value):
+            result = value
+        default:
+            XCTFail()
+        }
+        XCTAssertEqual(result, 2)
+    }
+    
+    func test_countValueWhenEmptyValue_shouldFail() {
+        //Given
+        var status: Result<Int, KVStoreError>?
+        var result: KVStoreError? = .none
+        store = KVStore(store: ["foo":"123", "bar":"456", "blz":"abc", "xpto":"456"])
+        service = KVStoreService(store: store)
+        
+        //When
+        status = service?.count(value: "")
+        
+        //Then
+        switch status {
+        case .failure(let error):
+            result = error
+        default:
+            XCTFail()
+        }
+        XCTAssertEqual(result, KVStoreError.emptyValue)
+    }
+    
+    func test_countValueWhenThereIsNoValue_shouldFail() {
+        //Given
+        var status: Result<Int, KVStoreError>?
+        var result = 0
+        store = KVStore(store: ["foo":"123", "bar":"456", "blz":"abc", "xpto":"456"])
+        service = KVStoreService(store: store)
+        
+        //When
+        status = service?.count(value: "xpto")
+        
+        //Then
+        switch status {
+        case .success(let value):
+            result = value
+        default:
+            XCTFail()
+        }
+        XCTAssertEqual(result, 0)
     }
 }

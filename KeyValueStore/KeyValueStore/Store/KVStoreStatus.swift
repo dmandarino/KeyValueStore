@@ -11,4 +11,5 @@ import Foundation
 public enum KVStoreError: Error {
     case keyNotFound
     case emptyKey
+    case emptyValue
 }

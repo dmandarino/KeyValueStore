@@ -12,6 +12,7 @@ public protocol KVStoreServicing {
     @discardableResult func set(key: String, value: String) -> Result<Void, KVStoreError>
     @discardableResult func delete(key: String) -> Result<Void, KVStoreError>
     func get(key: String) -> Result<String, KVStoreError>
+    func count(value: String) -> Result<Int, KVStoreError>
 }
 
 final class KVStoreService: KVStoreServicing {
@@ -45,5 +46,13 @@ final class KVStoreService: KVStoreServicing {
             return .failure(.keyNotFound)
         }
         return .success(())
+    }
+    
+    func count(value: String) -> Result<Int, KVStoreError> {
+        guard value.isNotEmpty else {
+            return .failure(.emptyValue)
+        }
+        let filtered = kvStore.store.filter { $0.value == value }
+        return .success(filtered.count)
     }
 }
