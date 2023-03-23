@@ -21,15 +21,20 @@ protocol KVTransactInteractable: KVTransacional {
     func count(value: String)
 }
 
-@objc protocol KVTransactPresentable: Any {
-    func presentResponse(message: String)
+protocol KVTransactPresentable: class {
+    func presentSuccess(response: String)
+    func presentError(error: TransactionalErrorReason)
 }
 
 final class KVTransactInteractor: KVTransactInteractable {
     
+    // MARK: - Variables
+    
     weak var delegate: KVTransactPresentable?
     private var storeService: KVStoreServicing
     private var stackService: KVStackServicing
+    
+    // MARK: - init
     
     init(storeService: KVStoreServicing, stackService: KVStackServicing) {
         self.storeService = storeService
@@ -39,19 +44,33 @@ final class KVTransactInteractor: KVTransactInteractable {
     // MARK: - KVTransactInteractable
     
     func set(key: String, value: String) {
-        
+        let result = storeService.set(key: key, value: value)
+        storeResultVoidHandler(result: result)
     }
     
     func delete(key: String) {
-        
+        let result = storeService.delete(key: key)
+        storeResultVoidHandler(result: result)
     }
     
     func get(key: String) {
-        
+        let result = storeService.get(key: key)
+        switch result {
+        case .failure(let error):
+            self.errorHandler(error: error)
+        case .success(let value):
+            delegate?.presentSuccess(response: value)
+        }
     }
     
     func count(value: String) {
-        
+        let result = storeService.count(value: value)
+        switch result {
+        case .failure(let error):
+            self.errorHandler(error: error)
+        case .success(let value):
+            delegate?.presentSuccess(response: "\(value)")
+        }
     }
     
     // MARK: - Transactional
@@ -66,5 +85,27 @@ final class KVTransactInteractor: KVTransactInteractable {
     
     func rollback() {
         
+    }
+    
+    // MARK: - Private
+    
+    func storeResultVoidHandler(result: Result<Void, KVStoreError>) {
+        switch result {
+        case .failure(let error):
+            self.errorHandler(error: error)
+        case .success(_):
+            return
+        }
+    }
+    
+    func errorHandler(error: KVStoreError) {
+        switch error {
+        case .emptyKey:
+            delegate?.presentError(error: .emptyKey)
+        case .keyNotFound:
+            delegate?.presentError(error: .keyNotFound)
+        case .emptyValue:
+            delegate?.presentError(error: .emptyValue)
+        }
     }
 }
