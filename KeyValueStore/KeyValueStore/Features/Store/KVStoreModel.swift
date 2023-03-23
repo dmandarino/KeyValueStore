@@ -12,7 +12,7 @@ protocol KVStoring {
     var store: [String: String] { get set }
 }
 
-class KVStore: KVStoring {
+final class KVStore: KVStoring {
     var store: [String: String]
     
     init(store: [String: String] = [:]) {

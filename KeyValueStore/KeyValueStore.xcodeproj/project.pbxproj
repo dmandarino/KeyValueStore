@@ -9,6 +9,11 @@
 /* Begin PBXBuildFile section */
 		5A7056D029CB8C3500034264 /* KVStoreStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7056CF29CB8C3500034264 /* KVStoreStatus.swift */; };
 		5A7056D429CBB1BF00034264 /* KVSExamplesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7056D329CBB1BF00034264 /* KVSExamplesTests.swift */; };
+		5A7056D829CBF72000034264 /* StackModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7056D729CBF72000034264 /* StackModel.swift */; };
+		5A7056DA29CBF8F900034264 /* StackService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7056D929CBF8F900034264 /* StackService.swift */; };
+		5A7056DC29CBF92900034264 /* KVStoreServicing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7056DB29CBF92900034264 /* KVStoreServicing.swift */; };
+		5A7056DE29CC00B800034264 /* NodeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7056DD29CC00B800034264 /* NodeModel.swift */; };
+		5A7056E129CC12F000034264 /* KVStackServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7056E029CC12F000034264 /* KVStackServiceTests.swift */; };
 		5A7C940729CB6BD200F2B631 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7C940629CB6BD200F2B631 /* AppDelegate.swift */; };
 		5A7C940929CB6BD200F2B631 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7C940829CB6BD200F2B631 /* SceneDelegate.swift */; };
 		5A7C940B29CB6BD200F2B631 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7C940A29CB6BD200F2B631 /* ContentView.swift */; };
@@ -16,7 +21,7 @@
 		5A7C941029CB6BD800F2B631 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5A7C940F29CB6BD800F2B631 /* Preview Assets.xcassets */; };
 		5A7C941329CB6BD800F2B631 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5A7C941129CB6BD800F2B631 /* LaunchScreen.storyboard */; };
 		5A7C942929CB6BD800F2B631 /* KeyValueStoreUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7C942829CB6BD800F2B631 /* KeyValueStoreUITests.swift */; };
-		5A7C943829CB6D3B00F2B631 /* KVStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7C943729CB6D3B00F2B631 /* KVStore.swift */; };
+		5A7C943829CB6D3B00F2B631 /* KVStoreModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7C943729CB6D3B00F2B631 /* KVStoreModel.swift */; };
 		5A7C943A29CB6DD200F2B631 /* KVStoreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7C943929CB6DD200F2B631 /* KVStoreService.swift */; };
 		5A7C943C29CB707200F2B631 /* KVStoreBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7C943B29CB707200F2B631 /* KVStoreBuilder.swift */; };
 		5A7C943E29CB726B00F2B631 /* KVStoreServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7C943D29CB726B00F2B631 /* KVStoreServiceTests.swift */; };
@@ -43,6 +48,11 @@
 /* Begin PBXFileReference section */
 		5A7056CF29CB8C3500034264 /* KVStoreStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KVStoreStatus.swift; sourceTree = "<group>"; };
 		5A7056D329CBB1BF00034264 /* KVSExamplesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KVSExamplesTests.swift; sourceTree = "<group>"; };
+		5A7056D729CBF72000034264 /* StackModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackModel.swift; sourceTree = "<group>"; };
+		5A7056D929CBF8F900034264 /* StackService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackService.swift; sourceTree = "<group>"; };
+		5A7056DB29CBF92900034264 /* KVStoreServicing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KVStoreServicing.swift; sourceTree = "<group>"; };
+		5A7056DD29CC00B800034264 /* NodeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeModel.swift; sourceTree = "<group>"; };
+		5A7056E029CC12F000034264 /* KVStackServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KVStackServiceTests.swift; sourceTree = "<group>"; };
 		5A7C940329CB6BD200F2B631 /* KeyValueStore.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KeyValueStore.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A7C940629CB6BD200F2B631 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5A7C940829CB6BD200F2B631 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -56,7 +66,7 @@
 		5A7C942429CB6BD800F2B631 /* KeyValueStoreUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KeyValueStoreUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A7C942829CB6BD800F2B631 /* KeyValueStoreUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyValueStoreUITests.swift; sourceTree = "<group>"; };
 		5A7C942A29CB6BD800F2B631 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		5A7C943729CB6D3B00F2B631 /* KVStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KVStore.swift; sourceTree = "<group>"; };
+		5A7C943729CB6D3B00F2B631 /* KVStoreModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KVStoreModel.swift; sourceTree = "<group>"; };
 		5A7C943929CB6DD200F2B631 /* KVStoreService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KVStoreService.swift; sourceTree = "<group>"; };
 		5A7C943B29CB707200F2B631 /* KVStoreBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KVStoreBuilder.swift; sourceTree = "<group>"; };
 		5A7C943D29CB726B00F2B631 /* KVStoreServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KVStoreServiceTests.swift; sourceTree = "<group>"; };
@@ -111,6 +121,17 @@
 		5A7056D629CBB43B00034264 /* Stack */ = {
 			isa = PBXGroup;
 			children = (
+				5A7056D729CBF72000034264 /* StackModel.swift */,
+				5A7056DD29CC00B800034264 /* NodeModel.swift */,
+				5A7056D929CBF8F900034264 /* StackService.swift */,
+			);
+			path = Stack;
+			sourceTree = "<group>";
+		};
+		5A7056DF29CC12CC00034264 /* Stack */ = {
+			isa = PBXGroup;
+			children = (
+				5A7056E029CC12F000034264 /* KVStackServiceTests.swift */,
 			);
 			path = Stack;
 			sourceTree = "<group>";
@@ -160,6 +181,7 @@
 			isa = PBXGroup;
 			children = (
 				5A7C941F29CB6BD800F2B631 /* Info.plist */,
+				5A7056DF29CC12CC00034264 /* Stack */,
 				5A7C943F29CB774000F2B631 /* Store */,
 				5A7056D329CBB1BF00034264 /* KVSExamplesTests.swift */,
 			);
@@ -178,10 +200,11 @@
 		5A7C943629CB6C6600F2B631 /* Store */ = {
 			isa = PBXGroup;
 			children = (
-				5A7C943729CB6D3B00F2B631 /* KVStore.swift */,
+				5A7C943729CB6D3B00F2B631 /* KVStoreModel.swift */,
 				5A7C943929CB6DD200F2B631 /* KVStoreService.swift */,
 				5A7C943B29CB707200F2B631 /* KVStoreBuilder.swift */,
 				5A7056CF29CB8C3500034264 /* KVStoreStatus.swift */,
+				5A7056DB29CBF92900034264 /* KVStoreServicing.swift */,
 			);
 			path = Store;
 			sourceTree = "<group>";
@@ -334,12 +357,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				5A7056D029CB8C3500034264 /* KVStoreStatus.swift in Sources */,
+				5A7056D829CBF72000034264 /* StackModel.swift in Sources */,
+				5A7056DC29CBF92900034264 /* KVStoreServicing.swift in Sources */,
 				5A7C943C29CB707200F2B631 /* KVStoreBuilder.swift in Sources */,
 				5A7C943A29CB6DD200F2B631 /* KVStoreService.swift in Sources */,
+				5A7056DE29CC00B800034264 /* NodeModel.swift in Sources */,
 				5A7C944429CB7F1100F2B631 /* StringExtension.swift in Sources */,
 				5A7C940729CB6BD200F2B631 /* AppDelegate.swift in Sources */,
+				5A7056DA29CBF8F900034264 /* StackService.swift in Sources */,
 				5A7C940929CB6BD200F2B631 /* SceneDelegate.swift in Sources */,
-				5A7C943829CB6D3B00F2B631 /* KVStore.swift in Sources */,
+				5A7C943829CB6D3B00F2B631 /* KVStoreModel.swift in Sources */,
 				5A7C940B29CB6BD200F2B631 /* ContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -349,6 +376,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5A7C943E29CB726B00F2B631 /* KVStoreServiceTests.swift in Sources */,
+				5A7056E129CC12F000034264 /* KVStackServiceTests.swift in Sources */,
 				5A7056D429CBB1BF00034264 /* KVSExamplesTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
