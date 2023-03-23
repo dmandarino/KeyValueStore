@@ -26,7 +26,7 @@ protocol KVTransactPresentable: class {
     func presentError(error: TransactionalErrorReason)
 }
 
-final class KVTransactInteractor: KVTransactInteractable {
+final class KVTransactionalInteractor: KVTransactInteractable {
     
     // MARK: - Variables
     

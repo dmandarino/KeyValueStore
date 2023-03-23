@@ -28,7 +28,7 @@ struct KVTransactionalBuilder: KVTransacionalDependencies {
     }
     
     func build() -> KVTransactInteractable {
-        let interactor = KVTransactInteractor(storeService: storeService, stackService: stackService)
+        let interactor = KVTransactionalInteractor(storeService: storeService, stackService: stackService)
         return interactor
     }
 }

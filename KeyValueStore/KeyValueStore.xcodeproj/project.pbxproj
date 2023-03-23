@@ -28,7 +28,11 @@
 		5A7C944429CB7F1100F2B631 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7C944329CB7F1100F2B631 /* StringExtension.swift */; };
 		5A92FFF429CCD90000714FAF /* KVTransactInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A92FFF329CCD90000714FAF /* KVTransactInteractor.swift */; };
 		5A92FFF629CCE00000714FAF /* KVTransactionalBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A92FFF529CCE00000714FAF /* KVTransactionalBuilder.swift */; };
+		5A9C17B929CCFE25007007C5 /* KVTransactPresentableMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A9C17B829CCFE25007007C5 /* KVTransactPresentableMock.swift */; };
 		5AC6632229CCEE9B0013DB75 /* TransactionalErrorReason.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AC6632129CCEE9B0013DB75 /* TransactionalErrorReason.swift */; };
+		5AC6632629CCF4960013DB75 /* KVTransactionalInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AC6632529CCF4960013DB75 /* KVTransactionalInteractorTests.swift */; };
+		5AC6632929CCFA720013DB75 /* KVStoreServicingMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AC6632829CCFA720013DB75 /* KVStoreServicingMock.swift */; };
+		5AC6632C29CCFAE80013DB75 /* KVStackServicingMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AC6632B29CCFAE80013DB75 /* KVStackServicingMock.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,7 +80,11 @@
 		5A7C944329CB7F1100F2B631 /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		5A92FFF329CCD90000714FAF /* KVTransactInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KVTransactInteractor.swift; sourceTree = "<group>"; };
 		5A92FFF529CCE00000714FAF /* KVTransactionalBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KVTransactionalBuilder.swift; sourceTree = "<group>"; };
+		5A9C17B829CCFE25007007C5 /* KVTransactPresentableMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KVTransactPresentableMock.swift; sourceTree = "<group>"; };
 		5AC6632129CCEE9B0013DB75 /* TransactionalErrorReason.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionalErrorReason.swift; sourceTree = "<group>"; };
+		5AC6632529CCF4960013DB75 /* KVTransactionalInteractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KVTransactionalInteractorTests.swift; sourceTree = "<group>"; };
+		5AC6632829CCFA720013DB75 /* KVStoreServicingMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KVStoreServicingMock.swift; sourceTree = "<group>"; };
+		5AC6632B29CCFAE80013DB75 /* KVStackServicingMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KVStackServicingMock.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,14 +123,14 @@
 			name = Foundation;
 			sourceTree = "<group>";
 		};
-		5A7056D529CBB42B00034264 /* Features */ = {
+		5A7056D529CBB42B00034264 /* Feature */ = {
 			isa = PBXGroup;
 			children = (
 				5A92FFF229CCD8D000714FAF /* Transactional */,
 				5A7056D629CBB43B00034264 /* Stack */,
 				5A7C943629CB6C6600F2B631 /* Store */,
 			);
-			path = Features;
+			path = Feature;
 			sourceTree = "<group>";
 		};
 		5A7056D629CBB43B00034264 /* Stack */ = {
@@ -138,6 +146,7 @@
 		5A7056DF29CC12CC00034264 /* Stack */ = {
 			isa = PBXGroup;
 			children = (
+				5AC6632A29CCFAD00013DB75 /* Mock */,
 				5A7056E029CC12F000034264 /* KVStackServiceTests.swift */,
 			);
 			path = Stack;
@@ -166,7 +175,7 @@
 		5A7C940529CB6BD200F2B631 /* KeyValueStore */ = {
 			isa = PBXGroup;
 			children = (
-				5A7056D529CBB42B00034264 /* Features */,
+				5A7056D529CBB42B00034264 /* Feature */,
 				5A7C944229CB7EFC00F2B631 /* Helper */,
 				5A7C940829CB6BD200F2B631 /* SceneDelegate.swift */,
 				5A7C940A29CB6BD200F2B631 /* ContentView.swift */,
@@ -187,9 +196,8 @@
 		5A7C941C29CB6BD800F2B631 /* KeyValueStoreTests */ = {
 			isa = PBXGroup;
 			children = (
+				5AC6632329CCF3D00013DB75 /* Feature */,
 				5A7C941F29CB6BD800F2B631 /* Info.plist */,
-				5A7056DF29CC12CC00034264 /* Stack */,
-				5A7C943F29CB774000F2B631 /* Store */,
 				5A7056D329CBB1BF00034264 /* KVSExamplesTests.swift */,
 			);
 			path = KeyValueStoreTests;
@@ -219,6 +227,7 @@
 		5A7C943F29CB774000F2B631 /* Store */ = {
 			isa = PBXGroup;
 			children = (
+				5AC6632729CCFA660013DB75 /* Mock */,
 				5A7C943D29CB726B00F2B631 /* KVStoreServiceTests.swift */,
 			);
 			path = Store;
@@ -240,6 +249,49 @@
 				5AC6632129CCEE9B0013DB75 /* TransactionalErrorReason.swift */,
 			);
 			path = Transactional;
+			sourceTree = "<group>";
+		};
+		5A9C17B729CCFE0D007007C5 /* Mock */ = {
+			isa = PBXGroup;
+			children = (
+				5A9C17B829CCFE25007007C5 /* KVTransactPresentableMock.swift */,
+			);
+			path = Mock;
+			sourceTree = "<group>";
+		};
+		5AC6632329CCF3D00013DB75 /* Feature */ = {
+			isa = PBXGroup;
+			children = (
+				5AC6632429CCF3F70013DB75 /* Transactional */,
+				5A7C943F29CB774000F2B631 /* Store */,
+				5A7056DF29CC12CC00034264 /* Stack */,
+			);
+			path = Feature;
+			sourceTree = "<group>";
+		};
+		5AC6632429CCF3F70013DB75 /* Transactional */ = {
+			isa = PBXGroup;
+			children = (
+				5A9C17B729CCFE0D007007C5 /* Mock */,
+				5AC6632529CCF4960013DB75 /* KVTransactionalInteractorTests.swift */,
+			);
+			path = Transactional;
+			sourceTree = "<group>";
+		};
+		5AC6632729CCFA660013DB75 /* Mock */ = {
+			isa = PBXGroup;
+			children = (
+				5AC6632829CCFA720013DB75 /* KVStoreServicingMock.swift */,
+			);
+			path = Mock;
+			sourceTree = "<group>";
+		};
+		5AC6632A29CCFAD00013DB75 /* Mock */ = {
+			isa = PBXGroup;
+			children = (
+				5AC6632B29CCFAE80013DB75 /* KVStackServicingMock.swift */,
+			);
+			path = Mock;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -396,8 +448,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				5A7C943E29CB726B00F2B631 /* KVStoreServiceTests.swift in Sources */,
+				5AC6632C29CCFAE80013DB75 /* KVStackServicingMock.swift in Sources */,
+				5AC6632629CCF4960013DB75 /* KVTransactionalInteractorTests.swift in Sources */,
 				5A7056E129CC12F000034264 /* KVStackServiceTests.swift in Sources */,
+				5AC6632929CCFA720013DB75 /* KVStoreServicingMock.swift in Sources */,
 				5A7056D429CBB1BF00034264 /* KVSExamplesTests.swift in Sources */,
+				5A9C17B929CCFE25007007C5 /* KVTransactPresentableMock.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
