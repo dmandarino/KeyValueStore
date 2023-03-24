@@ -9,7 +9,7 @@
 @testable import KeyValueStore
 import XCTest
 
-class KVStoreServiceTests: XCTestCase {
+class KVStoreWorkerTests: XCTestCase {
 
     var service: KVStoreWorker?
     var storeMock = KVStoreMock()
@@ -22,25 +22,25 @@ class KVStoreServiceTests: XCTestCase {
 
     func test_setKeyValue_shouldInsertAValue() {
         //Given
-        XCTAssertEqual(storeMock.store, [:])
+        XCTAssertEqual(storeMock.items, [:])
         
         //When
         service?.set(key: "foo", value: "123")
         
         //Then
-        XCTAssertEqual(storeMock.store["foo"], "123")
+        XCTAssertEqual(storeMock.items["foo"], "123")
     }
     
     func test_setKeyValueForSameKey_shouldUpdate() {
         //Given
-        XCTAssertEqual(storeMock.store, [:])
+        XCTAssertEqual(storeMock.items, [:])
         
         //When
         service?.set(key: "foo", value: "123")
         service?.set(key: "foo", value: "abc")
         
         //Then
-        XCTAssertEqual(storeMock.store["foo"], "abc")
+        XCTAssertEqual(storeMock.items["foo"], "abc")
     }
     
     //MARK: - GET
@@ -49,7 +49,7 @@ class KVStoreServiceTests: XCTestCase {
         //Given
         storeMock = KVStoreMock(store: ["foo":"123"])
         service = KVStoreWorker(store: storeMock)
-        XCTAssertEqual(storeMock.store, ["foo":"123"])
+        XCTAssertEqual(storeMock.items, ["foo":"123"])
 
         //When
         let result = service?.get(key: "foo")
@@ -62,7 +62,7 @@ class KVStoreServiceTests: XCTestCase {
         //Given
         storeMock = KVStoreMock(store: ["foo":"123"])
         service = KVStoreWorker(store: storeMock)
-        XCTAssertEqual(storeMock.store, ["foo":"123"])
+        XCTAssertEqual(storeMock.items, ["foo":"123"])
 
         //When
         let result = service?.get(key: "bar")
@@ -77,27 +77,27 @@ class KVStoreServiceTests: XCTestCase {
         //Given
         storeMock = KVStoreMock(store: ["foo":"123", "bar":"456"])
         service = KVStoreWorker(store: storeMock)
-        XCTAssertEqual(storeMock.store, ["foo":"123", "bar":"456"])
+        XCTAssertEqual(storeMock.items, ["foo":"123", "bar":"456"])
         
         //When
         service?.delete(key: "foo")
         
         //Then
-        XCTAssertNil(storeMock.store["foo"])
-        XCTAssertEqual(storeMock.store, ["bar":"456"])
+        XCTAssertNil(storeMock.items["foo"])
+        XCTAssertEqual(storeMock.items, ["bar":"456"])
     }
     
     func test_deleteValueWhenThereIsNoKey_shouldFail() {
         //Given
         storeMock = KVStoreMock(store: ["foo":"123", "bar":"456"])
         service = KVStoreWorker(store: storeMock)
-        XCTAssertEqual(storeMock.store, ["foo":"123", "bar":"456"])
+        XCTAssertEqual(storeMock.items, ["foo":"123", "bar":"456"])
         
         //When
         service?.delete(key: "xpto")
         
         //Then
-        XCTAssertEqual(storeMock.store, ["foo":"123", "bar":"456"])
+        XCTAssertEqual(storeMock.items, ["foo":"123", "bar":"456"])
     }
     
     //MARK: - GET ALL
@@ -116,7 +116,7 @@ class KVStoreServiceTests: XCTestCase {
     
     func test_getAllWhenItsEmpty_shouldReturnAllValuesInStore() {
         //Given
-        XCTAssertEqual(storeMock.store, [:])
+        XCTAssertEqual(storeMock.items, [:])
         
         //When
         let result = service?.getAll()
@@ -137,7 +137,7 @@ class KVStoreServiceTests: XCTestCase {
         service?.updateStore(with: transactions)
         
         //Then
-        XCTAssertEqual(storeMock.store, ["foo":"123", "bar":"456", "blz":"abc", "xpto":"456"])
+        XCTAssertEqual(storeMock.items, ["foo":"123", "bar":"456", "blz":"abc", "xpto":"456"])
     }
     
     func test_updateStore_shoulMergeNewTrasactions() {
@@ -150,6 +150,6 @@ class KVStoreServiceTests: XCTestCase {
         service?.updateStore(with: transactions)
         
         //Then
-        XCTAssertEqual(storeMock.store, ["foo":"abc", "bar":"456", "xpto":"456"])
+        XCTAssertEqual(storeMock.items, ["foo":"abc", "bar":"456", "xpto":"456"])
     }
 }

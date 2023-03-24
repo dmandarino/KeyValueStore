@@ -9,9 +9,9 @@
 @testable import KeyValueStore
 
 class KVStoreMock: KVStoring {
-    var store: [String : String]
+    var items: [String : String]
     
     init(store: [String : String] = [:]) {
-        self.store = store
+        self.items = store
     }
 }

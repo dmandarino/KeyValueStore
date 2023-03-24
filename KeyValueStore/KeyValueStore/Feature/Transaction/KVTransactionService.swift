@@ -8,44 +8,44 @@
 
 import Foundation
 
-final class KVTransactionService: KVTransactionServicing {
-    
-    var kvStore: KVStoring
-    
-    init(store: KVStoring) {
-        self.kvStore = store
-    }
-    
-    func set(key: String, value: String) -> Result<Void, KVTransactionError> {
-        guard key.isNotEmpty else {
-            return .failure(.emptyKey)
-        }
-        kvStore.store[key] = value
-        return .success(())
-    }
-    
-    func get(key: String) -> Result<String, KVTransactionError> {
-        if let value = kvStore.store[key] {
-            return .success(value)
-        }
-        return .failure(.keyNotFound)
-    }
-    
-    func delete(key: String) -> Result<Void, KVTransactionError> {
-        guard key.isNotEmpty else {
-            return .failure(.emptyKey)
-        }
-        guard kvStore.store.removeValue(forKey: key) != nil else {
-            return .failure(.keyNotFound)
-        }
-        return .success(())
-    }
-    
-    func count(value: String) -> Result<Int, KVTransactionError> {
-        guard value.isNotEmpty else {
-            return .failure(.emptyValue)
-        }
-        let filtered = kvStore.store.filter { $0.value == value }
-        return .success(filtered.count)
-    }
-}
+//final class KVTransactionService: KVTransactionServicing {
+//
+//    var kvStore: KVStoring
+//    
+//    init(store: KVStoring) {
+//        self.kvStore = store
+//    }
+//    
+//    func set(key: String, value: String) -> Result<Void, KVTransactionError> {
+//        guard key.isNotEmpty else {
+//            return .failure(.emptyKey)
+//        }
+//        kvStore.items[key] = value
+//        return .success(())
+//    }
+//    
+//    func get(key: String) -> Result<String, KVTransactionError> {
+//        if let value = kvStore.items[key] {
+//            return .success(value)
+//        }
+//        return .failure(.keyNotFound)
+//    }
+//    
+//    func delete(key: String) -> Result<Void, KVTransactionError> {
+//        guard key.isNotEmpty else {
+//            return .failure(.emptyKey)
+//        }
+//        guard kvStore.items.removeValue(forKey: key) != nil else {
+//            return .failure(.keyNotFound)
+//        }
+//        return .success(())
+//    }
+//    
+//    func count(value: String) -> Result<Int, KVTransactionError> {
+//        guard value.isNotEmpty else {
+//            return .failure(.emptyValue)
+//        }
+//        let filtered = kvStore.items.filter { $0.value == value }
+//        return .success(filtered.count)
+//    }
+//}

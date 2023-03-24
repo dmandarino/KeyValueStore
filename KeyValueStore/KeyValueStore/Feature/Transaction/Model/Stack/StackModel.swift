@@ -9,12 +9,14 @@
 import Foundation
 
 protocol KVStacking {
-    static var items: [[Transaction]] { get set }
+    var items: [[KVTransactional]] { get }
 }
 
 final class KVStack: KVStacking {
     
-    static var items: [[Transaction]] = []
+    var items: [[KVTransactional]]
     
-    private init() {}
+    init(items: [[KVTransactional]] = []) {
+        self.items = items
+    }
 }

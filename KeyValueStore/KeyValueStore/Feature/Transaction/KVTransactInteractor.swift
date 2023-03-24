@@ -32,11 +32,11 @@ final class KVTransactionalInteractor: KVTransactInteractable {
 
     weak var delegate: KVTransactPresentable?
     private var storeService: KVTransactionServicing
-    private var stackService: KVStackServicing
+    private var stackService: KVStackWorkable
 
     // MARK: - init
 
-    init(storeService: KVTransactionServicing, stackService: KVStackServicing) {
+    init(storeService: KVTransactionServicing, stackService: KVStackWorkable) {
         self.storeService = storeService
         self.stackService = stackService
     }

@@ -9,13 +9,14 @@
 import Foundation
 
 protocol KVStoring {
-    var store: [String: String] { get set }
+    var items: [String: String] { get set }
 }
 
 final class KVStore: KVStoring {
-    var store: [String: String]
     
-    init(store: [String: String] = [:]) {
-        self.store = store
+    var items: [String: String]
+    
+    init(items: [String: String] = [:]) {
+        self.items = items
     }
 }
