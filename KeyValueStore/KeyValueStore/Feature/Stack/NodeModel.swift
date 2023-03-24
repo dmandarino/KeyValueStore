@@ -13,7 +13,7 @@ public enum Action {
     case SET
 }
 
-class Node {
+struct Transaction {
     let action: Action
     let key: String
     

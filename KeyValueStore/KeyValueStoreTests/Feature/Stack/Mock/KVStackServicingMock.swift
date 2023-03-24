@@ -10,7 +10,7 @@ import KeyValueStore
 
 class KVStackServicingMock: KVStackServicing {
     var shouldPass: Bool = false
-    var error: KVStoreError? = .none
+    var error: KVTransactionError? = .none
     var successString = ""
     var successInt = 0
     

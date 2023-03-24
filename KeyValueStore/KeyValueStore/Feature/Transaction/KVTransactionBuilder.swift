@@ -9,14 +9,14 @@
 import Foundation
 
 public protocol KVStoreBuildable {
-    static func build() -> KVStoreServicing
+    static func build() -> KVTransactionServicing
 }
 
-public final class KVStoreBuilder: KVStoreBuildable {
+public final class KVTransactionBuilder: KVStoreBuildable {
     
-    public static func build() -> KVStoreServicing {
+    public static func build() -> KVTransactionServicing {
         let store = KVStore()
-        let service = KVStoreService(store: store)
+        let service = KVTransactionService(store: store)
         return service
     }
 }

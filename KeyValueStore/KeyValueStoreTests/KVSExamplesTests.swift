@@ -11,16 +11,16 @@ import XCTest
 
 class KVSExamplesTests: XCTestCase {
     
-    var service: KVStoreService?
+    var service: KVTransactionService?
     var store = KVStore()
 
     override func setUp() {
-        service = KVStoreService(store: store)
+        service = KVTransactionService(store: store)
     }
 
     func test_setAndGetAValue() {
         //Given
-        var status: Result<Void, KVStoreError>?
+        var status: Result<Void, KVTransactionError>?
         XCTAssertEqual(store.store, [:])
         
         //When
@@ -38,10 +38,10 @@ class KVSExamplesTests: XCTestCase {
     
     func test_deleteAValue() {
         //Given
-        var status: Result<String, KVStoreError>?
-        var result: KVStoreError? = .none
+        var status: Result<String, KVTransactionError>?
+        var result: KVTransactionError? = .none
         store = KVStore(store: ["foo":"123"])
-        service = KVStoreService(store: store)
+        service = KVTransactionService(store: store)
         XCTAssertEqual(store.store, ["foo": "123"])
         
         //When
@@ -55,11 +55,11 @@ class KVSExamplesTests: XCTestCase {
         default:
             XCTFail()
         }
-        XCTAssertEqual(result, KVStoreError.keyNotFound)
+        XCTAssertEqual(result, KVTransactionError.keyNotFound)
     }
     
     func test_countTheNumberOfOccurrencesOfAValue() {
-        var status: Result<Int, KVStoreError>?
+        var status: Result<Int, KVTransactionError>?
         var result = 0
         XCTAssertEqual(store.store, [:])
         

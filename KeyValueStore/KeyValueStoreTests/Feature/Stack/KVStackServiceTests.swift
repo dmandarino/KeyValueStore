@@ -40,7 +40,7 @@ class KVStackServiceTests: XCTestCase {
     
     func test_pushActionNonEmptyStack_shouldInsertNewNode() {
         //Given
-        KVStack.items = [[Node(action: .DELETE, key: "foo")]]
+        KVStack.items = [[Transaction(action: .DELETE, key: "foo")]]
         
         //When
         service?.push(action: .SET, key: "bar")
@@ -56,7 +56,7 @@ class KVStackServiceTests: XCTestCase {
     
     func test_popWhenThereIsOnlyOneValue_shouldReturnLastActionAndKey() {
         //Given
-        KVStack.items = [[Node(action: .DELETE, key: "foo")]]
+        KVStack.items = [[Transaction(action: .DELETE, key: "foo")]]
         
         //When
         guard let (action, key) = service?.pop() else {
@@ -72,7 +72,7 @@ class KVStackServiceTests: XCTestCase {
     
     func test_popWhenThereIsMoreThanOneNode_shouldReturnLastActionAndKey() {
         //Given
-        KVStack.items = [[Node(action: .DELETE, key: "foo"), Node(action: .SET, key: "bar")]]
+        KVStack.items = [[Transaction(action: .DELETE, key: "foo"), Transaction(action: .SET, key: "bar")]]
         
         //When
         guard let (action, key) = service?.pop() else {
@@ -89,7 +89,7 @@ class KVStackServiceTests: XCTestCase {
     
     func test_popWhenThereIsMoreThanOneStack_shouldReturnLastActionAndKey() {
         //Given
-        KVStack.items = [[Node(action: .DELETE, key: "foo"), Node(action: .SET, key: "bar")], [Node(action: .DELETE, key: "xpto")]]
+        KVStack.items = [[Transaction(action: .DELETE, key: "foo"), Transaction(action: .SET, key: "bar")], [Transaction(action: .DELETE, key: "xpto")]]
         
         //When
         guard let (action, key) = service?.pop() else {

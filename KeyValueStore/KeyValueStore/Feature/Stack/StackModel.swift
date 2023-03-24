@@ -9,12 +9,12 @@
 import Foundation
 
 protocol KVStacking {
-    static var items: [[Node]] { get set }
+    static var items: [[Transaction]] { get set }
 }
 
 final class KVStack: KVStacking {
     
-    static var items: [[Node]] = []
+    static var items: [[Transaction]] = []
     
     private init() {}
 }

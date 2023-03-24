@@ -9,7 +9,7 @@
 import Foundation
 
 protocol KVTransacionalDependencies {
-    var storeService: KVStoreServicing { get }
+    var storeService: KVTransactionServicing { get }
     var stackService: KVStackServicing { get }
 }
 
@@ -19,8 +19,8 @@ protocol KVTransactionalBuildable {
 
 struct KVTransactionalBuilder: KVTransacionalDependencies {
     
-    var storeService: KVStoreServicing {
-        KVStoreBuilder.build()
+    var storeService: KVTransactionServicing {
+        KVTransactionBuilder.build()
     }
     
     var stackService: KVStackServicing {

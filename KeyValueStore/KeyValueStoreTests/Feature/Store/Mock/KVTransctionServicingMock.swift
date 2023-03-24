@@ -8,9 +8,9 @@
 
 import KeyValueStore
 
-class KVStoreServicingMock: KVStoreServicing {
+class KVTransactionServicingMock: KVTransactionServicing {
     var shouldPass: Bool = true
-    var error: KVStoreError? = .none
+    var error: KVTransactionError? = .none
     var successString = ""
     var successInt = 0
     
@@ -19,7 +19,7 @@ class KVStoreServicingMock: KVStoreServicing {
     var getCallCount = 0
     var countCallCount = 0
     
-    func set(key: String, value: String) -> Result<Void, KVStoreError> {
+    func set(key: String, value: String) -> Result<Void, KVTransactionError> {
         setCallCount += 1
         if shouldPass {
             return .success(())
@@ -27,7 +27,7 @@ class KVStoreServicingMock: KVStoreServicing {
         return .failure(.emptyKey)
     }
     
-    func delete(key: String) -> Result<Void, KVStoreError> {
+    func delete(key: String) -> Result<Void, KVTransactionError> {
         deleteCallCount += 1
         if shouldPass {
             return .success(())
@@ -35,7 +35,7 @@ class KVStoreServicingMock: KVStoreServicing {
         return .failure(error!)
     }
     
-    func get(key: String) -> Result<String, KVStoreError> {
+    func get(key: String) -> Result<String, KVTransactionError> {
         getCallCount += 1
         if shouldPass {
             return .success(successString)
@@ -43,7 +43,7 @@ class KVStoreServicingMock: KVStoreServicing {
         return .failure(.keyNotFound)
     }
     
-    func count(value: String) -> Result<Int, KVStoreError> {
+    func count(value: String) -> Result<Int, KVTransactionError> {
         countCallCount += 1
         if shouldPass {
             return .success(successInt)

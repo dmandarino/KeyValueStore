@@ -2,7 +2,7 @@
 //  KVStoreServiceTests.swift
 //  KeyValueStoreTests
 //
-//  Created by Douglas Mandarino on 22/03/23.
+//  Created by Douglas Mandarino on 24/03/23.
 //  Copyright © 2023 Douglas Mandarino. All rights reserved.
 //
 
@@ -10,260 +10,146 @@
 import XCTest
 
 class KVStoreServiceTests: XCTestCase {
-    
-    var service: KVStoreService?
-    var store = KVStore()
+
+    var service: KVStoreWorker?
+    var storeMock = KVStoreMock()
 
     override func setUp() {
-        service = KVStoreService(store: store)
+        service = KVStoreWorker(store: storeMock)
     }
     
     //MARK: - SET
 
     func test_setKeyValue_shouldInsertAValue() {
         //Given
-        var status: Result<Void, KVStoreError>?
-        XCTAssertEqual(store.store, [:])
+        XCTAssertEqual(storeMock.store, [:])
         
         //When
-        status = service?.set(key: "foo", value: "123")
+        service?.set(key: "foo", value: "123")
         
         //Then
-        switch status {
-        case .success(_):
-            break
-        default:
-            XCTFail()
-        }
-        XCTAssertEqual(store.store["foo"], "123")
+        XCTAssertEqual(storeMock.store["foo"], "123")
     }
     
-    func test_setKeyValueForSameKey_shouldInsertAValue() {
+    func test_setKeyValueForSameKey_shouldUpdate() {
         //Given
-        var status: Result<Void, KVStoreError>?
-        XCTAssertEqual(store.store, [:])
+        XCTAssertEqual(storeMock.store, [:])
         
         //When
-        status = service?.set(key: "foo", value: "123")
-        status = service?.set(key: "foo", value: "abc")
+        service?.set(key: "foo", value: "123")
+        service?.set(key: "foo", value: "abc")
         
         //Then
-        switch status {
-        case .success(_):
-            break
-        default:
-            XCTFail()
-        }
-        XCTAssertEqual(store.store["foo"], "abc")
+        XCTAssertEqual(storeMock.store["foo"], "abc")
     }
     
     //MARK: - GET
 
     func test_getKeyValue_shouldGetValueByKey() {
         //Given
-        var status: Result<String, KVStoreError>?
-        var result = ""
-        store = KVStore(store: ["foo":"123"])
-        service = KVStoreService(store: store)
-        XCTAssertEqual(store.store, ["foo":"123"])
+        storeMock = KVStoreMock(store: ["foo":"123"])
+        service = KVStoreWorker(store: storeMock)
+        XCTAssertEqual(storeMock.store, ["foo":"123"])
 
         //When
-        status = service?.get(key: "foo")
+        let result = service?.get(key: "foo")
 
         //Then
-        switch status {
-        case .success(let value):
-            result = value
-        default:
-            XCTFail()
-        }
         XCTAssertEqual(result, "123")
-    }
-
-    func test_getKeyValueAfterSettingAnotherValueForSameKey_shouldGetLatestKey() {
-        //Given
-        var status: Result<String, KVStoreError>?
-        var result = ""
-        store = KVStore(store: ["foo":"123"])
-        service = KVStoreService(store: store)
-        XCTAssertEqual(store.store, ["foo":"123"])
-
-        //When
-        _ = service?.set(key: "foo", value: "abc")
-        status = service?.get(key: "foo")
-
-        //Then
-        switch status {
-        case .success(let value):
-            result = value
-        default:
-            XCTFail()
-        }
-        XCTAssertEqual(result, "abc")
     }
     
     func test_getKeyDoesNotExist_shouldReturnNil() {
         //Given
-        var status: Result<String, KVStoreError>?
-        var result: KVStoreError? = .none
-        store = KVStore(store: ["foo":"123"])
-        service = KVStoreService(store: store)
-        XCTAssertEqual(store.store, ["foo":"123"])
-        
+        storeMock = KVStoreMock(store: ["foo":"123"])
+        service = KVStoreWorker(store: storeMock)
+        XCTAssertEqual(storeMock.store, ["foo":"123"])
+
         //When
-        status = service?.get(key: "bar")
-        
+        let result = service?.get(key: "bar")
+
         //Then
-        switch status {
-        case .failure(let error):
-            result = error
-        default:
-            XCTFail()
-        }
-        XCTAssertEqual(result, KVStoreError.keyNotFound)
+        XCTAssertNil(result)
     }
     
     //MARK: - DELETE
     
-    func test_deleteValueByKey_shouldDeleteTheKeyAndReturnSuccess() {
+    func test_deleteValueByKey_shouldDeleteTheKey() {
         //Given
-        var status: Result<Void, KVStoreError>?
-        store = KVStore(store: ["foo":"123", "bar":"456"])
-        service = KVStoreService(store: store)
+        storeMock = KVStoreMock(store: ["foo":"123", "bar":"456"])
+        service = KVStoreWorker(store: storeMock)
+        XCTAssertEqual(storeMock.store, ["foo":"123", "bar":"456"])
         
         //When
-        status = service?.delete(key: "foo")
+        service?.delete(key: "foo")
         
         //Then
-        switch status {
-        case .success():
-            break
-        default:
-            XCTFail()
-        }
-        XCTAssertNil(store.store["foo"])
+        XCTAssertNil(storeMock.store["foo"])
+        XCTAssertEqual(storeMock.store, ["bar":"456"])
     }
-    
-    func test_deleteValueWhenKeyIsEmpty_shouldFail() {
-        //Given
-        var status: Result<Void, KVStoreError>?
-        var result: KVStoreError? = .none
-        store = KVStore(store: ["foo":"123", "bar":"456"])
-        service = KVStoreService(store: store)
-        
-        //When
-        status = service?.delete(key: "")
-        
-        //Then
-        switch status {
-        case .failure(let error):
-            result = error
-        default:
-            XCTFail()
-        }
-        XCTAssertEqual(result, KVStoreError.emptyKey)
-    }
-    
     
     func test_deleteValueWhenThereIsNoKey_shouldFail() {
         //Given
-        var status: Result<Void, KVStoreError>?
-        var result: KVStoreError? = .none
-        store = KVStore(store: ["foo":"123", "bar":"456"])
-        service = KVStoreService(store: store)
+        storeMock = KVStoreMock(store: ["foo":"123", "bar":"456"])
+        service = KVStoreWorker(store: storeMock)
+        XCTAssertEqual(storeMock.store, ["foo":"123", "bar":"456"])
         
         //When
-        status = service?.delete(key: "beta")
+        service?.delete(key: "xpto")
         
         //Then
-        switch status {
-        case .failure(let error):
-            result = error
-        default:
-            XCTFail()
-        }
-        XCTAssertEqual(result, KVStoreError.keyNotFound)
+        XCTAssertEqual(storeMock.store, ["foo":"123", "bar":"456"])
     }
     
-    //MARK: - COUNT
+    //MARK: - GET ALL
     
-    func test_countValueOneValue_shouldReturnNumberOfMatchedValue() {
+    func test_getAll_shouldReturnAllValuesInStore() {
         //Given
-        var status: Result<Int, KVStoreError>?
-        var result = 0
-        store = KVStore(store: ["foo":"123", "bar":"456", "blz":"abc", "xpto":"456"])
-        service = KVStoreService(store: store)
+        storeMock = KVStoreMock(store: ["foo":"123", "bar":"456", "blz":"abc", "xpto":"456"])
+        service = KVStoreWorker(store: storeMock)
         
         //When
-        status = service?.count(value: "abc")
+        let result = service?.getAll()
         
         //Then
-        switch status {
-        case .success(let value):
-            result = value
-        default:
-            XCTFail()
-        }
-        XCTAssertEqual(result, 1)
+        XCTAssertEqual(result, ["foo":"123", "bar":"456", "blz":"abc", "xpto":"456"])
     }
     
-    func test_countValueWhenBiggerThanOne_shouldReturnNumberOfMatchedValue() {
+    func test_getAllWhenItsEmpty_shouldReturnAllValuesInStore() {
         //Given
-        var status: Result<Int, KVStoreError>?
-        var result = 0
-        store = KVStore(store: ["foo":"123", "bar":"456", "blz":"abc", "xpto":"456"])
-        service = KVStoreService(store: store)
+        XCTAssertEqual(storeMock.store, [:])
         
         //When
-        status = service?.count(value: "456")
+        let result = service?.getAll()
         
         //Then
-        switch status {
-        case .success(let value):
-            result = value
-        default:
-            XCTFail()
-        }
-        XCTAssertEqual(result, 2)
+        XCTAssertEqual(result, [:])
     }
     
-    func test_countValueWhenEmptyValue_shouldFail() {
+    //MARK: - UPDATE STORE
+    
+    func test_updateStore_shoulAddNewTrasactions() {
         //Given
-        var status: Result<Int, KVStoreError>?
-        var result: KVStoreError? = .none
-        store = KVStore(store: ["foo":"123", "bar":"456", "blz":"abc", "xpto":"456"])
-        service = KVStoreService(store: store)
+        storeMock = KVStoreMock(store: ["foo":"123", "bar":"456"])
+        service = KVStoreWorker(store: storeMock)
+        let transactions = ["blz":"abc", "xpto":"456"]
         
         //When
-        status = service?.count(value: "")
+        service?.updateStore(with: transactions)
         
         //Then
-        switch status {
-        case .failure(let error):
-            result = error
-        default:
-            XCTFail()
-        }
-        XCTAssertEqual(result, KVStoreError.emptyValue)
+        XCTAssertEqual(storeMock.store, ["foo":"123", "bar":"456", "blz":"abc", "xpto":"456"])
     }
     
-    func test_countValueWhenThereIsNoValue_shouldFail() {
+    func test_updateStore_shoulMergeNewTrasactions() {
         //Given
-        var status: Result<Int, KVStoreError>?
-        var result = 0
-        store = KVStore(store: ["foo":"123", "bar":"456", "blz":"abc", "xpto":"456"])
-        service = KVStoreService(store: store)
+        storeMock = KVStoreMock(store: ["foo":"123", "bar":"456"])
+        service = KVStoreWorker(store: storeMock)
+        let transactions = ["foo":"abc", "xpto":"456"]
         
         //When
-        status = service?.count(value: "xpto")
+        service?.updateStore(with: transactions)
         
         //Then
-        switch status {
-        case .success(let value):
-            result = value
-        default:
-            XCTFail()
-        }
-        XCTAssertEqual(result, 0)
+        XCTAssertEqual(storeMock.store, ["foo":"abc", "bar":"456", "xpto":"456"])
     }
 }

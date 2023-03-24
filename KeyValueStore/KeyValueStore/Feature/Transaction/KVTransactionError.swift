@@ -1,5 +1,5 @@
 //
-//  KVStoreStatus.swift
+//  KVTransactionError.swift
 //  KeyValueStore
 //
 //  Created by Douglas Mandarino on 22/03/23.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public enum KVStoreError: Error {
+public enum KVTransactionError: Error {
     case keyNotFound
     case emptyKey
     case emptyValue

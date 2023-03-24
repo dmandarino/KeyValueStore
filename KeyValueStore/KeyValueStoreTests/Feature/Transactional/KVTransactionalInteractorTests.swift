@@ -11,7 +11,7 @@ import XCTest
 
 class KVTransactionalInteractorTests: XCTestCase {
     
-    let storeService = KVStoreServicingMock()
+    let storeService = KVTransactionServicingMock()
     let stackService = KVStackServicingMock()
     let delegate = KVTransactPresentableMock()
     var interactor: KVTransactionalInteractor?

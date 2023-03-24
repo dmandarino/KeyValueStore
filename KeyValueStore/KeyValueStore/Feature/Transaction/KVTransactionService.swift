@@ -8,7 +8,7 @@
 
 import Foundation
 
-final class KVStoreService: KVStoreServicing {
+final class KVTransactionService: KVTransactionServicing {
     
     var kvStore: KVStoring
     
@@ -16,7 +16,7 @@ final class KVStoreService: KVStoreServicing {
         self.kvStore = store
     }
     
-    func set(key: String, value: String) -> Result<Void, KVStoreError> {
+    func set(key: String, value: String) -> Result<Void, KVTransactionError> {
         guard key.isNotEmpty else {
             return .failure(.emptyKey)
         }
@@ -24,14 +24,14 @@ final class KVStoreService: KVStoreServicing {
         return .success(())
     }
     
-    func get(key: String) -> Result<String, KVStoreError> {
+    func get(key: String) -> Result<String, KVTransactionError> {
         if let value = kvStore.store[key] {
             return .success(value)
         }
         return .failure(.keyNotFound)
     }
     
-    func delete(key: String) -> Result<Void, KVStoreError> {
+    func delete(key: String) -> Result<Void, KVTransactionError> {
         guard key.isNotEmpty else {
             return .failure(.emptyKey)
         }
@@ -41,7 +41,7 @@ final class KVStoreService: KVStoreServicing {
         return .success(())
     }
     
-    func count(value: String) -> Result<Int, KVStoreError> {
+    func count(value: String) -> Result<Int, KVTransactionError> {
         guard value.isNotEmpty else {
             return .failure(.emptyValue)
         }

@@ -16,7 +16,7 @@ public protocol KVStackServicing {
 public struct KVStackService: KVStackServicing {
     
     public func push(action: Action, key: String) {
-        let node = Node(action: action, key: key)
+        let node = Transaction(action: action, key: key)
         guard !KVStack.items.isEmpty else {
             KVStack.items.append([node])
             return
@@ -34,7 +34,7 @@ public struct KVStackService: KVStackServicing {
         return (topNode.action, topNode.key)
     }
     
-    private func updateStack(with node: Node) {
+    private func updateStack(with node: Transaction) {
         guard var top = KVStack.items.last else { return }
         KVStack.items.removeLast()
         top.append(node)

@@ -27,32 +27,32 @@ protocol KVTransactPresentable: class {
 }
 
 final class KVTransactionalInteractor: KVTransactInteractable {
-    
+
     // MARK: - Variables
-    
+
     weak var delegate: KVTransactPresentable?
-    private var storeService: KVStoreServicing
+    private var storeService: KVTransactionServicing
     private var stackService: KVStackServicing
-    
+
     // MARK: - init
-    
-    init(storeService: KVStoreServicing, stackService: KVStackServicing) {
+
+    init(storeService: KVTransactionServicing, stackService: KVStackServicing) {
         self.storeService = storeService
         self.stackService = stackService
     }
-    
+
     // MARK: - KVTransactInteractable
-    
+
     func set(key: String, value: String) {
         let result = storeService.set(key: key, value: value)
         storeResultVoidHandler(result: result)
     }
-    
+
     func delete(key: String) {
         let result = storeService.delete(key: key)
         storeResultVoidHandler(result: result)
     }
-    
+
     func get(key: String) {
         let result = storeService.get(key: key)
         switch result {
@@ -62,7 +62,7 @@ final class KVTransactionalInteractor: KVTransactInteractable {
             delegate?.presentSuccess(response: value)
         }
     }
-    
+
     func count(value: String) {
         let result = storeService.count(value: value)
         switch result {
@@ -72,24 +72,24 @@ final class KVTransactionalInteractor: KVTransactInteractable {
             delegate?.presentSuccess(response: "\(value)")
         }
     }
-    
+
     // MARK: - Transactional
-    
+
     func commit() {
-        
+
     }
-    
+
     func begin() {
-        
+
     }
-    
+
     func rollback() {
-        
+
     }
-    
+
     // MARK: - Private
-    
-    func storeResultVoidHandler(result: Result<Void, KVStoreError>) {
+
+    func storeResultVoidHandler(result: Result<Void, KVTransactionError>) {
         switch result {
         case .failure(let error):
             self.errorHandler(error: error)
@@ -97,8 +97,8 @@ final class KVTransactionalInteractor: KVTransactInteractable {
             return
         }
     }
-    
-    func errorHandler(error: KVStoreError) {
+
+    func errorHandler(error: KVTransactionError) {
         switch error {
         case .emptyKey:
             delegate?.presentError(error: .emptyKey)
