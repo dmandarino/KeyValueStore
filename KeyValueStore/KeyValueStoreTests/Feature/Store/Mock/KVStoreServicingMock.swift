@@ -9,7 +9,7 @@
 import KeyValueStore
 
 class KVStoreServicingMock: KVStoreServicing {
-    var shouldPass: Bool = false
+    var shouldPass: Bool = true
     var error: KVStoreError? = .none
     var successString = ""
     var successInt = 0
@@ -32,7 +32,7 @@ class KVStoreServicingMock: KVStoreServicing {
         if shouldPass {
             return .success(())
         }
-        return .failure(.keyNotFound)
+        return .failure(error!)
     }
     
     func get(key: String) -> Result<String, KVStoreError> {
