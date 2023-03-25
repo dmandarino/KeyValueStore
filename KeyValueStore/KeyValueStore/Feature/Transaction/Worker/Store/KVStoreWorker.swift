@@ -15,7 +15,7 @@ import Foundation
 public protocol KVStoreWorkable {
     func updateStore(with transactions: [String: String])
     func set(key: String, value: String)
-    func delete(key: String)
+    func delete(key: String) -> Bool
     func get(key: String) -> String?
     func getAll() -> [String: String]
 }
@@ -36,8 +36,11 @@ final class KVStoreWorker: KVStoreWorkable {
         kvStore.items[key] = value
     }
     
-    func delete(key: String) {
-        kvStore.items.removeValue(forKey: key)
+    func delete(key: String) -> Bool {
+        if let _ = kvStore.items.removeValue(forKey: key) {
+            return true
+        }
+        return false
     }
     
     func get(key: String) -> String? {

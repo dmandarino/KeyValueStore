@@ -38,6 +38,7 @@
 		5AE486AC29CDDEBA0082B436 /* KVStoreWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AE486AB29CDDEBA0082B436 /* KVStoreWorker.swift */; };
 		5AE486AE29CDE9DA0082B436 /* KVStoreWorkerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AE486AD29CDE9DA0082B436 /* KVStoreWorkerTests.swift */; };
 		5AE486B029CDF5520082B436 /* TransactionMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AE486AF29CDF5520082B436 /* TransactionMethods.swift */; };
+		5AF8F6B529CE4CD100300BD5 /* KVStoreWorkerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AF8F6B429CE4CD100300BD5 /* KVStoreWorkerMock.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -95,6 +96,7 @@
 		5AE486AB29CDDEBA0082B436 /* KVStoreWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KVStoreWorker.swift; sourceTree = "<group>"; };
 		5AE486AD29CDE9DA0082B436 /* KVStoreWorkerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KVStoreWorkerTests.swift; sourceTree = "<group>"; };
 		5AE486AF29CDF5520082B436 /* TransactionMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionMethods.swift; sourceTree = "<group>"; };
+		5AF8F6B429CE4CD100300BD5 /* KVStoreWorkerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KVStoreWorkerMock.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,6 +136,7 @@
 		5A2BF57E29CE448D0003546D /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				5A7056DD29CC00B800034264 /* TransactionModel.swift */,
 				5A2BF57F29CE449E0003546D /* Stack */,
 				5A2BF58029CE44A70003546D /* Store */,
 			);
@@ -154,6 +157,15 @@
 				5A7C943729CB6D3B00F2B631 /* KVStoreModel.swift */,
 			);
 			path = Store;
+			sourceTree = "<group>";
+		};
+		5A2BF58129CE46770003546D /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				5A7056DB29CBF92900034264 /* KVTransactionServicing.swift */,
+				5A7C943929CB6DD200F2B631 /* KVTransactionService.swift */,
+			);
+			path = Service;
 			sourceTree = "<group>";
 		};
 		5A7056D229CBB12800034264 /* Foundation */ = {
@@ -281,17 +293,15 @@
 		5A92FFF229CCD8D000714FAF /* Transaction */ = {
 			isa = PBXGroup;
 			children = (
+				5A2BF58129CE46770003546D /* Service */,
 				5A2BF57E29CE448D0003546D /* Model */,
 				5A2BF57D29CE44600003546D /* Worker */,
 				5A92FFF329CCD90000714FAF /* KVTransactInteractor.swift */,
 				5A7C943B29CB707200F2B631 /* KVTransactionBuilder.swift */,
-				5A7C943929CB6DD200F2B631 /* KVTransactionService.swift */,
 				5A92FFF529CCE00000714FAF /* KVTransactionalBuilder.swift */,
 				5A7056CF29CB8C3500034264 /* KVTransactionError.swift */,
-				5A7056DB29CBF92900034264 /* KVTransactionServicing.swift */,
 				5AC6632129CCEE9B0013DB75 /* TransactionalErrorReason.swift */,
 				5AE486AF29CDF5520082B436 /* TransactionMethods.swift */,
-				5A7056DD29CC00B800034264 /* TransactionModel.swift */,
 			);
 			path = Transaction;
 			sourceTree = "<group>";
@@ -301,7 +311,7 @@
 			children = (
 				5AC6632829CCFA720013DB75 /* KVTransctionServicingMock.swift */,
 				5A9C17B829CCFE25007007C5 /* KVTransactPresentableMock.swift */,
-				5A7C943D29CB726B00F2B631 /* KVTransactionServiceTests.swift */,
+				5AF8F6B429CE4CD100300BD5 /* KVStoreWorkerMock.swift */,
 			);
 			path = Mock;
 			sourceTree = "<group>";
@@ -321,6 +331,7 @@
 			children = (
 				5A9C17B729CCFE0D007007C5 /* Mock */,
 				5AC6632529CCF4960013DB75 /* KVTransactionalInteractorTests.swift */,
+				5A7C943D29CB726B00F2B631 /* KVTransactionServiceTests.swift */,
 			);
 			path = Transactional;
 			sourceTree = "<group>";
@@ -503,6 +514,7 @@
 				5A7056E129CC12F000034264 /* KVStackServiceTests.swift in Sources */,
 				5A924E2329CD4125005F28C8 /* KVStoreMock.swift in Sources */,
 				5AC6632929CCFA720013DB75 /* KVTransctionServicingMock.swift in Sources */,
+				5AF8F6B529CE4CD100300BD5 /* KVStoreWorkerMock.swift in Sources */,
 				5A7056D429CBB1BF00034264 /* KVSExamplesTests.swift in Sources */,
 				5A9C17B929CCFE25007007C5 /* KVTransactPresentableMock.swift in Sources */,
 				5A650BEF29CE1E7600A79270 /* KVStackWorkerTests.swift in Sources */,
