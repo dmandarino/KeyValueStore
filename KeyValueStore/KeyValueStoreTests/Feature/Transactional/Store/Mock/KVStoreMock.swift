@@ -10,10 +10,15 @@
 
 class KVStoreMock: KVStoring {
     
-    var items: [String : String]
+    var items: [String : String]? = nil
+    var valueExpected: String? = nil
+    var deleteExpected: String? = nil
+    var shouldFail = false
     
     var updateStoreCallCount = 0
     var getStoreCallCount = 0
+    var getValueCallCount = 0
+    var deleteCallCount = 0
     
     init(items: [String : String] = [:]) {
         self.items = items
@@ -22,11 +27,21 @@ class KVStoreMock: KVStoring {
     func updateStore(with items: [String : String]) -> [String : String] {
         updateStoreCallCount += 1
         self.items = items
-        return items
+        return shouldFail ? [:] : items
     }
     
-    func getStore() -> [String : String] {
+    func getStore() -> [String : String]? {
         getStoreCallCount += 1
-        return items
+        return shouldFail ? nil : items
+    }
+    
+    func getValue(by key: String) -> String? {
+        getValueCallCount += 1
+        return shouldFail ? nil : valueExpected
+    }
+    
+    func delete(by key: String) -> String? {
+        deleteCallCount += 1
+        return shouldFail ? nil : deleteExpected
     }
 }

@@ -8,13 +8,18 @@
 
 import Foundation
 
+/*
+    Local in memory storage. This is where there could be a replace of storage framework.
+*/
 protocol KVStoring {
     @discardableResult func updateStore(with items: [String : String]) -> [String : String]
-    func getStore() -> [String : String]
+    func getStore() -> [String : String]?
+    func getValue(by key: String) -> String?
+    func delete(by key: String) -> String?
 }
 
 final class KVStore: KVStoring {
-    
+
     private var items: [String: String]
     
     init(items: [String: String] = [:]) {
@@ -26,8 +31,18 @@ final class KVStore: KVStoring {
         return self.items
     }
     
-    func getStore() -> [String : String] {
+    func getStore() -> [String : String]? {
         self.items
     }
     
+    func getValue(by key: String) -> String? {
+        self.items[key]
+    }
+    
+    func delete(by key: String) -> String? {
+        guard let item = items.removeValue(forKey: key) else {
+            return nil
+        }
+        return item
+    }
 }

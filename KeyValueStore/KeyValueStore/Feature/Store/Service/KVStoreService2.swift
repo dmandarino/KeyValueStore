@@ -7,12 +7,12 @@
 //
 
 import Foundation
+//final class KVTransactionService2: KVTransactionServicing2 {
+final class KVStoreService: KVStoreServicing {
 
-final class KVTransactionService: KVTransactionServicing {
-
-    private var worker: KVStoreWorkable
+    private var worker: KVStoreWorkable2
     
-    init(worker: KVStoreWorkable) {
+    init(worker: KVStoreWorkable2) {
         self.worker = worker
     }
 

@@ -8,8 +8,10 @@
 
 import Foundation
 
-public enum KVTransactionError: Error {
+public enum KVStoreError: Error {
     case keyNotFound
     case emptyKey
     case emptyValue
+    case noStore
+    case unknown
 }

@@ -8,53 +8,93 @@
 
 import Foundation
 
-/*
- KVTransactionServicing is responsible for accessing Store. We're assuming is in memory, but if it was another SDK or local Storage,
- it's unlikely that we change this protocol to protect our application.
- */
-public protocol KVStoreWorkable {
+protocol KVStoreWorkerDelegate: AnyObject {
+    func didGetValueForKey(value: String)
+    func didGetAllTransactions(transactions: [String: String])
+    func handleWithError(error: TransactionErrorReason)
+}
+
+protocol KVStoreWorkable {
     func updateStore(with transactions: [String: String])
     func set(key: String, value: String)
-    func delete(key: String) -> Bool
-    func get(key: String) -> String?
-    func getAll() -> [String: String]
+    func delete(by key: String)
+    func find(by key: String)
+    func findAllElements()
 }
 
 final class KVStoreWorker: KVStoreWorkable {
     
-    private var kvStore: KVStoring
+    // MARK: - Public Variables
     
-    init(store: KVStoring) {
-        self.kvStore = store
+    var delegate: KVStoreWorkerDelegate?
+    
+    // MARK: - Private Variables
+    
+    private var service: KVStoreServicing
+    
+    // MARK: - Init
+    
+    init(service: KVStoreServicing) {
+        self.service = service
     }
     
+    // MARK: - KVStoreWorkable
+    
     func updateStore(with transactions: [String : String]) {
-        var stored = kvStore.getStore()
-        stored.merge(transactions) { (_, new) in new }
-        kvStore.updateStore(with: stored)
+        let result = service.getAll()
+        switch result {
+        case .success(let oldTransactions):
+            updateTransactionsByKey(oldTransactions: oldTransactions, newTransactions: transactions)
+        case .failure(let error):
+            sendError(error: error)
+        }
     }
     
     func set(key: String, value: String) {
-        var stored = kvStore.getStore()
-        stored[key] = value
-        kvStore.updateStore(with: stored)
-    }
-    
-    func delete(key: String) -> Bool {
-        var stored = kvStore.getStore()
-        if let _ = stored.removeValue(forKey: key) {
-            kvStore.updateStore(with: stored)
-            return true
+        if case let .failure(error) = service.set(key: key, value: value) {
+            sendError(error: error)
         }
-        return false
     }
     
-    func get(key: String) -> String? {
-        var stored = kvStore.getStore()
-        return stored[key]
+    func delete(by key: String) {
+        if case let .failure(error) = service.delete(key: key) {
+            sendError(error: error)
+        }
     }
     
-    func getAll() -> [String : String] {
-        kvStore.getStore()
+    func find(by key: String) {
+        let operation = service.get(key: key)
+        switch operation {
+        case .success(let result):
+            delegate?.didGetValueForKey(value: result)
+        case .failure(let error):
+            sendError(error: error)
+        }
+    }
+    
+    func findAllElements() {
+        let operation = service.getAll()
+        switch operation {
+        case .success(let result):
+            delegate?.didGetAllTransactions(transactions: result)
+        case .failure(let error):
+            sendError(error: error)
+        }
+    }
+    
+    // MARK: - Private Methods
+    
+    private func sendError(error: KVStoreError) {
+        let error = TransactionErrorReason.match(error: error)
+        delegate?.handleWithError(error: error)
+    }
+    
+    private func updateTransactionsByKey(oldTransactions: [String: String], newTransactions: [String: String]) {
+        var stored = oldTransactions
+        stored.merge(newTransactions) { (_, new) in new }
+        let operation = service.updateStore(items: stored)
+        if case let .failure(error) = service.updateStore(items: stored) {
+            sendError(error: error)
+        }
     }
 }
