@@ -14,7 +14,6 @@
 		5A7056DA29CBF8F900034264 /* StackWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7056D929CBF8F900034264 /* StackWorker.swift */; };
 		5A7056DC29CBF92900034264 /* KVTransactionServicing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7056DB29CBF92900034264 /* KVTransactionServicing.swift */; };
 		5A7056DE29CC00B800034264 /* TransactionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7056DD29CC00B800034264 /* TransactionModel.swift */; };
-		5A7056E129CC12F000034264 /* KVStackServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7056E029CC12F000034264 /* KVStackServiceTests.swift */; };
 		5A7C940729CB6BD200F2B631 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7C940629CB6BD200F2B631 /* AppDelegate.swift */; };
 		5A7C940929CB6BD200F2B631 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7C940829CB6BD200F2B631 /* SceneDelegate.swift */; };
 		5A7C940B29CB6BD200F2B631 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7C940A29CB6BD200F2B631 /* ContentView.swift */; };
@@ -24,7 +23,6 @@
 		5A7C942929CB6BD800F2B631 /* KeyValueStoreUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7C942829CB6BD800F2B631 /* KeyValueStoreUITests.swift */; };
 		5A7C943829CB6D3B00F2B631 /* KVStoreModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7C943729CB6D3B00F2B631 /* KVStoreModel.swift */; };
 		5A7C943A29CB6DD200F2B631 /* KVTransactionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7C943929CB6DD200F2B631 /* KVTransactionService.swift */; };
-		5A7C943C29CB707200F2B631 /* KVTransactionBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7C943B29CB707200F2B631 /* KVTransactionBuilder.swift */; };
 		5A7C943E29CB726B00F2B631 /* KVTransactionServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7C943D29CB726B00F2B631 /* KVTransactionServiceTests.swift */; };
 		5A7C944429CB7F1100F2B631 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7C944329CB7F1100F2B631 /* StringExtension.swift */; };
 		5A924E2329CD4125005F28C8 /* KVStoreMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A924E2229CD4125005F28C8 /* KVStoreMock.swift */; };
@@ -66,7 +64,6 @@
 		5A7056D929CBF8F900034264 /* StackWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackWorker.swift; sourceTree = "<group>"; };
 		5A7056DB29CBF92900034264 /* KVTransactionServicing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KVTransactionServicing.swift; sourceTree = "<group>"; };
 		5A7056DD29CC00B800034264 /* TransactionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionModel.swift; sourceTree = "<group>"; };
-		5A7056E029CC12F000034264 /* KVStackServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KVStackServiceTests.swift; sourceTree = "<group>"; };
 		5A7C940329CB6BD200F2B631 /* KeyValueStore.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KeyValueStore.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A7C940629CB6BD200F2B631 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5A7C940829CB6BD200F2B631 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -82,7 +79,6 @@
 		5A7C942A29CB6BD800F2B631 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5A7C943729CB6D3B00F2B631 /* KVStoreModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KVStoreModel.swift; sourceTree = "<group>"; };
 		5A7C943929CB6DD200F2B631 /* KVTransactionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KVTransactionService.swift; sourceTree = "<group>"; };
-		5A7C943B29CB707200F2B631 /* KVTransactionBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KVTransactionBuilder.swift; sourceTree = "<group>"; };
 		5A7C943D29CB726B00F2B631 /* KVTransactionServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KVTransactionServiceTests.swift; sourceTree = "<group>"; };
 		5A7C944329CB7F1100F2B631 /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		5A924E2229CD4125005F28C8 /* KVStoreMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KVStoreMock.swift; sourceTree = "<group>"; };
@@ -127,36 +123,8 @@
 		5A2BF57D29CE44600003546D /* Worker */ = {
 			isa = PBXGroup;
 			children = (
-				5A7056D629CBB43B00034264 /* Stack */,
-				5A7C943629CB6C6600F2B631 /* Store */,
 			);
 			path = Worker;
-			sourceTree = "<group>";
-		};
-		5A2BF57E29CE448D0003546D /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				5A7056DD29CC00B800034264 /* TransactionModel.swift */,
-				5A2BF57F29CE449E0003546D /* Stack */,
-				5A2BF58029CE44A70003546D /* Store */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		5A2BF57F29CE449E0003546D /* Stack */ = {
-			isa = PBXGroup;
-			children = (
-				5A7056D729CBF72000034264 /* StackModel.swift */,
-			);
-			path = Stack;
-			sourceTree = "<group>";
-		};
-		5A2BF58029CE44A70003546D /* Store */ = {
-			isa = PBXGroup;
-			children = (
-				5A7C943729CB6D3B00F2B631 /* KVStoreModel.swift */,
-			);
-			path = Store;
 			sourceTree = "<group>";
 		};
 		5A2BF58129CE46770003546D /* Service */ = {
@@ -182,24 +150,17 @@
 		5A7056D529CBB42B00034264 /* Feature */ = {
 			isa = PBXGroup;
 			children = (
+				5A7C943629CB6C6600F2B631 /* Store */,
+				FFDD1A7329D087090094102D /* Stack */,
 				5A92FFF229CCD8D000714FAF /* Transaction */,
 			);
 			path = Feature;
-			sourceTree = "<group>";
-		};
-		5A7056D629CBB43B00034264 /* Stack */ = {
-			isa = PBXGroup;
-			children = (
-				5A7056D929CBF8F900034264 /* StackWorker.swift */,
-			);
-			path = Stack;
 			sourceTree = "<group>";
 		};
 		5A7056DF29CC12CC00034264 /* Stack */ = {
 			isa = PBXGroup;
 			children = (
 				5AC6632A29CCFAD00013DB75 /* Mock */,
-				5A7056E029CC12F000034264 /* KVStackServiceTests.swift */,
 				5A650BEE29CE1E7600A79270 /* KVStackWorkerTests.swift */,
 			);
 			path = Stack;
@@ -269,6 +230,9 @@
 			isa = PBXGroup;
 			children = (
 				5AE486AB29CDDEBA0082B436 /* KVStoreWorker.swift */,
+				5A7056CF29CB8C3500034264 /* KVTransactionError.swift */,
+				5A2BF58129CE46770003546D /* Service */,
+				FFDD1A7529D0882F0094102D /* Model */,
 			);
 			path = Store;
 			sourceTree = "<group>";
@@ -293,14 +257,9 @@
 		5A92FFF229CCD8D000714FAF /* Transaction */ = {
 			isa = PBXGroup;
 			children = (
-				5A2BF58129CE46770003546D /* Service */,
-				5A2BF57E29CE448D0003546D /* Model */,
 				5A2BF57D29CE44600003546D /* Worker */,
 				5A92FFF329CCD90000714FAF /* KVTransactInteractor.swift */,
-				5A7C943B29CB707200F2B631 /* KVTransactionBuilder.swift */,
 				5A92FFF529CCE00000714FAF /* KVTransactionalBuilder.swift */,
-				5A7056CF29CB8C3500034264 /* KVTransactionError.swift */,
-				5AC6632129CCEE9B0013DB75 /* TransactionalErrorReason.swift */,
 				5AE486AF29CDF5520082B436 /* TransactionMethods.swift */,
 			);
 			path = Transaction;
@@ -320,8 +279,6 @@
 			isa = PBXGroup;
 			children = (
 				5AC6632429CCF3F70013DB75 /* Transactional */,
-				5A7C943F29CB774000F2B631 /* Store */,
-				5A7056DF29CC12CC00034264 /* Stack */,
 			);
 			path = Feature;
 			sourceTree = "<group>";
@@ -329,6 +286,8 @@
 		5AC6632429CCF3F70013DB75 /* Transactional */ = {
 			isa = PBXGroup;
 			children = (
+				5A7C943F29CB774000F2B631 /* Store */,
+				5A7056DF29CC12CC00034264 /* Stack */,
 				5A9C17B729CCFE0D007007C5 /* Mock */,
 				5AC6632529CCF4960013DB75 /* KVTransactionalInteractorTests.swift */,
 				5A7C943D29CB726B00F2B631 /* KVTransactionServiceTests.swift */,
@@ -350,6 +309,33 @@
 				5AC6632B29CCFAE80013DB75 /* KVStackServicingMock.swift */,
 			);
 			path = Mock;
+			sourceTree = "<group>";
+		};
+		FFDD1A7329D087090094102D /* Stack */ = {
+			isa = PBXGroup;
+			children = (
+				5AC6632129CCEE9B0013DB75 /* TransactionalErrorReason.swift */,
+				5A7056D929CBF8F900034264 /* StackWorker.swift */,
+				FFDD1A7429D0880B0094102D /* Model */,
+			);
+			path = Stack;
+			sourceTree = "<group>";
+		};
+		FFDD1A7429D0880B0094102D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				5A7056D729CBF72000034264 /* StackModel.swift */,
+				5A7056DD29CC00B800034264 /* TransactionModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		FFDD1A7529D0882F0094102D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				5A7C943729CB6D3B00F2B631 /* KVStoreModel.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -487,7 +473,6 @@
 				5A7056D829CBF72000034264 /* StackModel.swift in Sources */,
 				5A92FFF629CCE00000714FAF /* KVTransactionalBuilder.swift in Sources */,
 				5A7056DC29CBF92900034264 /* KVTransactionServicing.swift in Sources */,
-				5A7C943C29CB707200F2B631 /* KVTransactionBuilder.swift in Sources */,
 				5A7C943A29CB6DD200F2B631 /* KVTransactionService.swift in Sources */,
 				5A7056DE29CC00B800034264 /* TransactionModel.swift in Sources */,
 				5A7C944429CB7F1100F2B631 /* StringExtension.swift in Sources */,
@@ -511,7 +496,6 @@
 				5AE486AE29CDE9DA0082B436 /* KVStoreWorkerTests.swift in Sources */,
 				5AC6632C29CCFAE80013DB75 /* KVStackServicingMock.swift in Sources */,
 				5AC6632629CCF4960013DB75 /* KVTransactionalInteractorTests.swift in Sources */,
-				5A7056E129CC12F000034264 /* KVStackServiceTests.swift in Sources */,
 				5A924E2329CD4125005F28C8 /* KVStoreMock.swift in Sources */,
 				5AC6632929CCFA720013DB75 /* KVTransctionServicingMock.swift in Sources */,
 				5AF8F6B529CE4CD100300BD5 /* KVStoreWorkerMock.swift in Sources */,

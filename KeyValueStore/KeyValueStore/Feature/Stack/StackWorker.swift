@@ -13,14 +13,14 @@ enum StackError: Error {
 }
 
 protocol KVStackWorkable {
-    func begin()
+    func begin(transientTransaction: [String : String])
     func commit() -> Result<KVTransaction, StackError>
     func rollback() -> Result<Void, StackError>
     func updateTransaction(item: [String : String])
 }
 
 class KVStackWorker: KVStackWorkable {
-    
+
     private(set) var transactions: [KVTransaction] = []
     
     init() {}
@@ -30,8 +30,8 @@ class KVStackWorker: KVStackWorkable {
         self.transactions = transactions
     }
     
-    func begin() {
-        let transaction = KVTransaction()
+    func begin(transientTransaction: [String : String]) {
+        let transaction = KVTransaction(items: transientTransaction)
         transactions.append(transaction)
     }
     
@@ -46,7 +46,7 @@ class KVStackWorker: KVStackWorkable {
     }
     
     func rollback() -> Result<Void, StackError> {
-        guard let _ = removeLastTransaction() else {
+        guard removeLastTransaction() != nil else {
             return .failure(.noTransaction)
         }
         return .success(())
@@ -57,7 +57,9 @@ class KVStackWorker: KVStackWorkable {
         transactions.last?.updateItems(with: item)
     }
     
-    @discardableResult private func removeLastTransaction() -> KVTransaction? {
+    // MARK: - Private
+    
+    private func removeLastTransaction() -> KVTransaction? {
         guard !transactions.isEmpty else {
             return nil
         }

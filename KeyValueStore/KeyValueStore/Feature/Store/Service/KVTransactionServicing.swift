@@ -17,4 +17,6 @@ public protocol KVTransactionServicing {
     @discardableResult func delete(key: String) -> Result<Void, KVTransactionError>
     func get(key: String) -> Result<String, KVTransactionError>
     func count(value: String) -> Result<Int, KVTransactionError>
+    func updateTransaction(items: [String : String])
+    func getTransientTransaction() -> [String : String]
 }

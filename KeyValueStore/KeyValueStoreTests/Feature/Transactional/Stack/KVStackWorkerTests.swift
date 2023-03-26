@@ -24,10 +24,11 @@ class KVStackWorkerTests: XCTestCase {
         XCTAssertTrue((worker?.transactions.isEmpty)!)
         
         //When
-        worker?.begin()
+        worker?.begin(transientTransaction: [:])
         
         //Then
         XCTAssertEqual(worker?.transactions.count, 1)
+        XCTAssertEqual(worker?.transactions.last!.items, [:])
     }
     
     func test_beginWhenThereIsAlreadyTransaction_shouldCreateAnotherTransaction() {
@@ -37,11 +38,11 @@ class KVStackWorkerTests: XCTestCase {
         XCTAssertEqual(worker?.transactions.first!.items, transaction.items)
         
         //When
-        worker?.begin()
+        worker?.begin(transientTransaction: ["xpto" : "123"])
         
         //Then
         XCTAssertEqual(worker?.transactions.count, 2)
-        XCTAssertEqual(worker?.transactions.last!.items, [:])
+        XCTAssertEqual(worker?.transactions.last!.items, ["xpto" : "123"])
     }
     
     //MARK: - COMMIT

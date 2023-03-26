@@ -29,25 +29,32 @@ final class KVStoreWorker: KVStoreWorkable {
     }
     
     func updateStore(with transactions: [String : String]) {
-        kvStore.items.merge(transactions) { (_, new) in new }
+        var stored = kvStore.getStore()
+        stored.merge(transactions) { (_, new) in new }
+        kvStore.updateStore(with: stored)
     }
     
     func set(key: String, value: String) {
-        kvStore.items[key] = value
+        var stored = kvStore.getStore()
+        stored[key] = value
+        kvStore.updateStore(with: stored)
     }
     
     func delete(key: String) -> Bool {
-        if let _ = kvStore.items.removeValue(forKey: key) {
+        var stored = kvStore.getStore()
+        if let _ = stored.removeValue(forKey: key) {
+            kvStore.updateStore(with: stored)
             return true
         }
         return false
     }
     
     func get(key: String) -> String? {
-        kvStore.items[key]
+        var stored = kvStore.getStore()
+        return stored[key]
     }
     
     func getAll() -> [String : String] {
-        kvStore.items
+        kvStore.getStore()
     }
 }

@@ -10,6 +10,7 @@ import KeyValueStore
 
 class KVTransactionServicingMock: KVTransactionServicing {
     var shouldPass: Bool = true
+    var store: [String : String] = [:]
     var error: KVTransactionError? = .none
     var successString = ""
     var successInt = 0
@@ -18,6 +19,8 @@ class KVTransactionServicingMock: KVTransactionServicing {
     var deleteCallCount = 0
     var getCallCount = 0
     var countCallCount = 0
+    var getTransientTransactionCount = 0
+    var updateTransaction = 0
     
     func set(key: String, value: String) -> Result<Void, KVTransactionError> {
         setCallCount += 1
@@ -49,5 +52,14 @@ class KVTransactionServicingMock: KVTransactionServicing {
             return .success(successInt)
         }
         return .failure(.emptyValue)
+    }
+    
+    func getTransientTransaction() -> [String : String] {
+        getTransientTransactionCount += 1
+        return store
+    }
+    
+    func updateTransaction(items: [String : String]) {
+        updateTransaction += 1
     }
 }

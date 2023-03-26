@@ -10,7 +10,7 @@ import Foundation
 
 final class KVTransactionService: KVTransactionServicing {
 
-    var worker: KVStoreWorkable
+    private var worker: KVStoreWorkable
     
     init(worker: KVStoreWorkable) {
         self.worker = worker
@@ -49,5 +49,14 @@ final class KVTransactionService: KVTransactionServicing {
         let store = worker.getAll()
         let filtered = store.filter { $0.value == value }
         return .success(filtered.count)
+    }
+    
+    func updateTransaction(items: [String : String]) {
+        let transaction = worker.getAll()
+        worker.updateStore(with: items)
+    }
+    
+    func getTransientTransaction() -> [String : String] {
+        worker.getAll()
     }
 }

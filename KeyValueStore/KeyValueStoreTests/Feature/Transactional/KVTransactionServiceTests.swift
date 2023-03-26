@@ -187,10 +187,11 @@ class KVTransactionServiceTests: XCTestCase {
         //Given
         var status: Result<Int, KVTransactionError>?
         var result = 0
-        service = KVTransactionService(store: store)
+        worker.store = ["foo":"123", "bar":"456"]
+        service = KVTransactionService(worker: worker)
 
         //When
-        status = service?.count(value: "abc")
+        status = service?.count(value: "456")
 
         //Then
         switch status {
@@ -201,64 +202,64 @@ class KVTransactionServiceTests: XCTestCase {
         }
         XCTAssertEqual(result, 1)
     }
-//
-//    func test_countValueWhenBiggerThanOne_shouldReturnNumberOfMatchedValue() {
-//        //Given
-//        var status: Result<Int, KVTransactionError>?
-//        var result = 0
-//        store = KVStoreMock(store: ["foo":"123", "bar":"456", "blz":"abc", "xpto":"456"])
-//        service = KVTransactionService(store: store)
-//
-//        //When
-//        status = service?.count(value: "456")
-//
-//        //Then
-//        switch status {
-//        case .success(let value):
-//            result = value
-//        default:
-//            XCTFail()
-//        }
-//        XCTAssertEqual(result, 2)
-//    }
-//
-//    func test_countValueWhenEmptyValue_shouldFail() {
-//        //Given
-//        var status: Result<Int, KVTransactionError>?
-//        var result: KVTransactionError? = .none
-//        store = KVStoreMock(store: ["foo":"123", "bar":"456", "blz":"abc", "xpto":"456"])
-//        service = KVTransactionService(store: store)
-//
-//        //When
-//        status = service?.count(value: "")
-//
-//        //Then
-//        switch status {
-//        case .failure(let error):
-//            result = error
-//        default:
-//            XCTFail()
-//        }
-//        XCTAssertEqual(result, KVTransactionError.emptyValue)
-//    }
-//
-//    func test_countValueWhenThereIsNoValue_shouldFail() {
-//        //Given
-//        var status: Result<Int, KVTransactionError>?
-//        var result = 0
-//        store = KVStoreMock(store: ["foo":"123", "bar":"456", "blz":"abc", "xpto":"456"])
-//        service = KVTransactionService(store: store)
-//
-//        //When
-//        status = service?.count(value: "xpto")
-//
-//        //Then
-//        switch status {
-//        case .success(let value):
-//            result = value
-//        default:
-//            XCTFail()
-//        }
-//        XCTAssertEqual(result, 0)
-//    }
+
+    func test_countValueWhenBiggerThanOne_shouldReturnNumberOfMatchedValue() {
+        //Given
+        var status: Result<Int, KVTransactionError>?
+        var result = 0
+        worker.store = ["foo":"123", "bar":"456", "blz":"abc", "xpto":"456"]
+        service = KVTransactionService(worker: worker)
+
+        //When
+        status = service?.count(value: "456")
+
+        //Then
+        switch status {
+        case .success(let value):
+            result = value
+        default:
+            XCTFail()
+        }
+        XCTAssertEqual(result, 2)
+    }
+
+    func test_countValueWhenEmptyValue_shouldFail() {
+        //Given
+        var status: Result<Int, KVTransactionError>?
+        var result: KVTransactionError? = .none
+        worker.store = ["foo":"123", "bar":"456", "blz":"abc", "xpto":"456"]
+        service = KVTransactionService(worker: worker)
+
+        //When
+        status = service?.count(value: "")
+
+        //Then
+        switch status {
+        case .failure(let error):
+            result = error
+        default:
+            XCTFail()
+        }
+        XCTAssertEqual(result, KVTransactionError.emptyValue)
+    }
+
+    func test_countValueWhenThereIsNoValue_shouldFail() {
+        //Given
+        var status: Result<Int, KVTransactionError>?
+        var result = 0
+        worker.store = ["foo":"123", "bar":"456", "blz":"abc", "xpto":"456"]
+        service = KVTransactionService(worker: worker)
+
+        //When
+        status = service?.count(value: "xpto")
+
+        //Then
+        switch status {
+        case .success(let value):
+            result = value
+        default:
+            XCTFail()
+        }
+        XCTAssertEqual(result, 0)
+    }
 }
