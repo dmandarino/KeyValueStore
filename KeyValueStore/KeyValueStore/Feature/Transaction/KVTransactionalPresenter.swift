@@ -36,6 +36,7 @@ class KVTransactionalPresenter: ObservableObject, KVTransactionalPresentable, KV
     // MARK: - KVTransactionalPresentable
     
     func execute(transaction: SelectedMethod) {
+        response = ""
         switch transaction {
         case .BEGIN:
             interactor.begin()
@@ -49,6 +50,7 @@ class KVTransactionalPresenter: ObservableObject, KVTransactionalPresentable, KV
     }
     
     func execute(method: SelectedMethod, key: String = "", value: String = "") {
+        response = ""
         switch method {
         case .SET:
             interactor.set(key: key, value: value)
@@ -57,7 +59,7 @@ class KVTransactionalPresenter: ObservableObject, KVTransactionalPresentable, KV
         case .DELETE:
             interactor.delete(key: key)
         case .COUNT:
-            interactor.count(value: key)
+            interactor.count(value: value)
         default:
             break
         }
