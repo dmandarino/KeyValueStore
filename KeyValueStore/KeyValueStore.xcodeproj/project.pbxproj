@@ -285,6 +285,7 @@
 		5AC6632329CCF3D00013DB75 /* Feature */ = {
 			isa = PBXGroup;
 			children = (
+				5A7C943D29CB726B00F2B631 /* KVTransactionServiceTests.swift */,
 				5A7C943F29CB774000F2B631 /* Store */,
 				5A7056DF29CC12CC00034264 /* Stack */,
 				5AC6632429CCF3F70013DB75 /* Transactional */,
@@ -297,7 +298,6 @@
 			children = (
 				5A9C17B729CCFE0D007007C5 /* Mock */,
 				5AC6632529CCF4960013DB75 /* KVTransactionalInteractorTests.swift */,
-				5A7C943D29CB726B00F2B631 /* KVTransactionServiceTests.swift */,
 			);
 			path = Transactional;
 			sourceTree = "<group>";

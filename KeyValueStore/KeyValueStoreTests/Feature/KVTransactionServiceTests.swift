@@ -10,7 +10,7 @@
 import XCTest
 
 //class KVTransactionServiceTests: XCTestCase {
-//    
+//
 //    var service: KVTransactionService?
 //    var worker = KVStoreWorkerMock()
 //
@@ -19,16 +19,16 @@ import XCTest
 //        worker.store = ["foo":"123"]
 //        service = KVTransactionService(worker: worker)
 //    }
-//    
+//
 //    //MARK: - SET
 //
 //    func test_setKeyValue_shouldInsertAValue() {
 //        //Given
 //        var status: Result<Void, KVStoreError>?
-//        
+//
 //        //When
 //        status = service?.set(key: "bar", value: "456")
-//        
+//
 //        //Then
 //        switch status {
 //        case .success(_):
@@ -38,7 +38,7 @@ import XCTest
 //        }
 //        XCTAssertEqual(worker.setCallCount, 1)
 //    }
-//    
+//
 //    func test_setEmptyKey_shouldFail() {
 //        //Given
 //        var status: Result<Void, KVStoreError>?
@@ -126,7 +126,7 @@ import XCTest
 //        var status: Result<Void, KVStoreError>?
 //        worker.store = ["foo":"123", "bar":"456"]
 //        var didSuccess = false
-//        
+//
 //        //When
 //        status = service?.delete(key: "foo")
 //
@@ -147,7 +147,7 @@ import XCTest
 //        var result: KVStoreError? = .none
 //        worker.store = ["foo":"123", "bar":"456"]
 //        service = KVTransactionService(worker: worker)
-//        
+//
 //        //When
 //        status = service?.delete(key: "")
 //

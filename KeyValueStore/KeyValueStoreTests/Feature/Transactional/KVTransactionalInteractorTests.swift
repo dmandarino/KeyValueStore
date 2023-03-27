@@ -26,6 +26,7 @@ class KVTransactionalInteractorTests: XCTestCase {
     func test_setKeyValue_shoulCallsetInStoreWorker() {
         //Given
         XCTAssertEqual(storeWorker.setCallCount, 0)
+        XCTAssertEqual(stackWorker.updateTransactionCallCount, 0)
         
         // When
         interactor?.set(key: "abc", value: "123")
@@ -33,6 +34,7 @@ class KVTransactionalInteractorTests: XCTestCase {
         // Then
         XCTAssertEqual(storeWorker.setCallCount, 1)
         XCTAssertEqual(storeWorker.expectedStore, ["abc": "123"])
+        XCTAssertEqual(stackWorker.updateTransactionCallCount, 1)
     }
     
     func test_setKeyValueWhenShouldFail_callDelegateToPresentErorr() {
@@ -95,6 +97,7 @@ class KVTransactionalInteractorTests: XCTestCase {
         //Given
         XCTAssertEqual(storeWorker.deleteCallCount, 0)
         XCTAssertEqual(delegate.presentSuccessCallCount, 0)
+        XCTAssertEqual(stackWorker.updateTransactionCallCount, 0)
         
         // When
         interactor?.delete(key: "abc")
@@ -102,6 +105,7 @@ class KVTransactionalInteractorTests: XCTestCase {
         // Then
         XCTAssertEqual(storeWorker.deleteCallCount, 1)
         XCTAssertEqual(delegate.presentSuccessCallCount, 0)
+        XCTAssertEqual(stackWorker.updateTransactionCallCount, 1)
     }
     
     func test_deleteValue_whenEmptyKey_shoulPresentError() {
@@ -182,5 +186,77 @@ class KVTransactionalInteractorTests: XCTestCase {
         // Then
         XCTAssertEqual(delegate.presentErrorCallCount, 1)
         XCTAssertEqual(delegate.error, .noTransaction)
+    }
+    
+    //MARK: - STACK
+    
+    func test_begin_shouldCreateNewTransaction() {
+        //Given
+        storeWorker.expectedStore = ["abc": "123"]
+        XCTAssertEqual(stackWorker.beginCallCount, 0)
+        
+        // When
+        interactor?.begin()
+        
+        // Then
+        XCTAssertEqual(stackWorker.beginCallCount, 1)
+        XCTAssertEqual(stackWorker.transaction?.items, ["abc": "123"])
+    }
+    
+    func test_rollback_shouldCallRollBack() {
+        //Given
+        XCTAssertEqual(stackWorker.rollbackCallCount, 0)
+
+        // When
+        interactor?.rollback()
+
+        // Then
+        XCTAssertEqual(stackWorker.rollbackCallCount, 1)
+    }
+    
+    func test_rollbackWhenShouldFail_shouldPresentError() {
+        //Given
+        stackWorker.shouldFail = true
+        stackWorker.error = .noTransaction
+        XCTAssertEqual(stackWorker.rollbackCallCount, 0)
+
+        // When
+        interactor?.rollback()
+
+        // Then
+        XCTAssertEqual(stackWorker.rollbackCallCount, 1)
+        XCTAssertEqual(delegate.presentErrorCallCount, 1)
+        XCTAssertEqual(delegate.error, .noTransaction)
+    }
+    
+    func test_commit_shouldUpdateStore() {
+        //Given
+        stackWorker.transaction = KVTransaction(items: ["abc": "123"])
+        XCTAssertEqual(stackWorker.commitCallCount, 0)
+        XCTAssertEqual(storeWorker.updateStoreCallCount, 0)
+
+        // When
+        interactor?.commit()
+
+        // Then
+        XCTAssertEqual(stackWorker.commitCallCount, 1)
+        XCTAssertEqual(storeWorker.updateStoreCallCount, 1)
+        XCTAssertEqual(storeWorker.expectedStore, ["abc": "123"])
+    }
+    
+    func test_commitWhenFail_shouldPresentError() {
+        //Given
+        stackWorker.error = .noTransaction
+        stackWorker.shouldFail = true
+        XCTAssertEqual(stackWorker.commitCallCount, 0)
+        XCTAssertEqual(storeWorker.updateStoreCallCount, 0)
+
+        // When
+        interactor?.commit()
+
+        // Then
+        XCTAssertEqual(stackWorker.commitCallCount, 1)
+        XCTAssertEqual(storeWorker.updateStoreCallCount, 0)
+        XCTAssertEqual(delegate.presentErrorCallCount, 1)
     }
 }

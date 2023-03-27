@@ -23,6 +23,7 @@ class KVStackWorkerMock: KVStackWorkable {
     
     func begin(transientTransaction: [String : String]) {
         beginCallCount += 1
+        transaction = KVTransaction(items: transientTransaction)
     }
     
     func commit() -> Result<KeyValueStore.KVTransaction, KeyValueStore.TransactionErrorReason> {

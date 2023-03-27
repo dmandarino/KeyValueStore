@@ -49,6 +49,7 @@ final class KVTransactionalInteractor: KVTransactInteractable {
             return
         }
         storeWorker.set(key: key, value: value)
+        updateTransactionalStack()
     }
     
     func delete(key: String) {
@@ -57,6 +58,7 @@ final class KVTransactionalInteractor: KVTransactInteractable {
             return
         }
         storeWorker.delete(by: key)
+        updateTransactionalStack()
     }
     
     func get(key: String) {
@@ -99,6 +101,16 @@ final class KVTransactionalInteractor: KVTransactInteractable {
         if case .failure(let error) = stackWorker.rollback() {
             delegate?.presentError(error: error)
         }
+    }
+    
+    // MARK: - Private Methods
+    
+    private func updateTransactionalStack() {
+        guard let transient = storeWorker.getAll() else {
+            delegate?.presentError(error: .noStore)
+            return
+        }
+        stackWorker.updateTransaction(items: transient)
     }
 }
 
