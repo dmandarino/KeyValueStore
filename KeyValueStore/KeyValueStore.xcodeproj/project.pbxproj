@@ -37,6 +37,9 @@
 		5AE486AE29CDE9DA0082B436 /* KVStoreServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AE486AD29CDE9DA0082B436 /* KVStoreServiceTests.swift */; };
 		5AE486B029CDF5520082B436 /* TransactionMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AE486AF29CDF5520082B436 /* TransactionMethods.swift */; };
 		5AF8F6B529CE4CD100300BD5 /* KVStoreWorkerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AF8F6B429CE4CD100300BD5 /* KVStoreWorkerMock.swift */; };
+		FF98A38E29D106890032A6C9 /* KVStoreWorkerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF98A38D29D106890032A6C9 /* KVStoreWorkerTests.swift */; };
+		FF98A39029D106ED0032A6C9 /* KVStoreServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF98A38F29D106ED0032A6C9 /* KVStoreServiceMock.swift */; };
+		FF98A39229D109590032A6C9 /* KVStoreWorkerDelegateMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF98A39129D109590032A6C9 /* KVStoreWorkerDelegateMock.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -93,6 +96,9 @@
 		5AE486AD29CDE9DA0082B436 /* KVStoreServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KVStoreServiceTests.swift; sourceTree = "<group>"; };
 		5AE486AF29CDF5520082B436 /* TransactionMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionMethods.swift; sourceTree = "<group>"; };
 		5AF8F6B429CE4CD100300BD5 /* KVStoreWorkerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KVStoreWorkerMock.swift; sourceTree = "<group>"; };
+		FF98A38D29D106890032A6C9 /* KVStoreWorkerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KVStoreWorkerTests.swift; sourceTree = "<group>"; };
+		FF98A38F29D106ED0032A6C9 /* KVStoreServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KVStoreServiceMock.swift; sourceTree = "<group>"; };
+		FF98A39129D109590032A6C9 /* KVStoreWorkerDelegateMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KVStoreWorkerDelegateMock.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -242,6 +248,7 @@
 			children = (
 				5AC6632729CCFA660013DB75 /* Mock */,
 				5AE486AD29CDE9DA0082B436 /* KVStoreServiceTests.swift */,
+				FF98A38D29D106890032A6C9 /* KVStoreWorkerTests.swift */,
 			);
 			path = Store;
 			sourceTree = "<group>";
@@ -278,6 +285,8 @@
 		5AC6632329CCF3D00013DB75 /* Feature */ = {
 			isa = PBXGroup;
 			children = (
+				5A7C943F29CB774000F2B631 /* Store */,
+				5A7056DF29CC12CC00034264 /* Stack */,
 				5AC6632429CCF3F70013DB75 /* Transactional */,
 			);
 			path = Feature;
@@ -286,8 +295,6 @@
 		5AC6632429CCF3F70013DB75 /* Transactional */ = {
 			isa = PBXGroup;
 			children = (
-				5A7C943F29CB774000F2B631 /* Store */,
-				5A7056DF29CC12CC00034264 /* Stack */,
 				5A9C17B729CCFE0D007007C5 /* Mock */,
 				5AC6632529CCF4960013DB75 /* KVTransactionalInteractorTests.swift */,
 				5A7C943D29CB726B00F2B631 /* KVTransactionServiceTests.swift */,
@@ -299,6 +306,8 @@
 			isa = PBXGroup;
 			children = (
 				5A924E2229CD4125005F28C8 /* KVStoreMock.swift */,
+				FF98A38F29D106ED0032A6C9 /* KVStoreServiceMock.swift */,
+				FF98A39129D109590032A6C9 /* KVStoreWorkerDelegateMock.swift */,
 			);
 			path = Mock;
 			sourceTree = "<group>";
@@ -492,9 +501,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FF98A39029D106ED0032A6C9 /* KVStoreServiceMock.swift in Sources */,
 				5A7C943E29CB726B00F2B631 /* KVTransactionServiceTests.swift in Sources */,
 				5AE486AE29CDE9DA0082B436 /* KVStoreServiceTests.swift in Sources */,
+				FF98A39229D109590032A6C9 /* KVStoreWorkerDelegateMock.swift in Sources */,
 				5AC6632C29CCFAE80013DB75 /* KVStackServicingMock.swift in Sources */,
+				FF98A38E29D106890032A6C9 /* KVStoreWorkerTests.swift in Sources */,
 				5AC6632629CCF4960013DB75 /* KVTransactionalInteractorTests.swift in Sources */,
 				5A924E2329CD4125005F28C8 /* KVStoreMock.swift in Sources */,
 				5AC6632929CCFA720013DB75 /* KVTransctionServicingMock.swift in Sources */,

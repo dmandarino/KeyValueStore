@@ -18,8 +18,8 @@ protocol KVStoreWorkable {
     func updateStore(with transactions: [String: String])
     func set(key: String, value: String)
     func delete(by key: String)
-    func find(by key: String)
-    func findAllElements()
+    func get(by key: String)
+    func getAll()
 }
 
 final class KVStoreWorker: KVStoreWorkable {
@@ -51,18 +51,30 @@ final class KVStoreWorker: KVStoreWorkable {
     }
     
     func set(key: String, value: String) {
+        guard key.isNotEmpty || value.isNotEmpty else {
+            delegate?.handleWithError(error: .emptyKey)
+            return
+        }
         if case let .failure(error) = service.set(key: key, value: value) {
             sendError(error: error)
         }
     }
     
     func delete(by key: String) {
+        guard key.isNotEmpty else {
+            delegate?.handleWithError(error: .emptyKey)
+            return
+        }
         if case let .failure(error) = service.delete(key: key) {
             sendError(error: error)
         }
     }
     
-    func find(by key: String) {
+    func get(by key: String) {
+        guard key.isNotEmpty else {
+            delegate?.handleWithError(error: .emptyKey)
+            return
+        }
         let operation = service.get(key: key)
         switch operation {
         case .success(let result):
@@ -72,7 +84,7 @@ final class KVStoreWorker: KVStoreWorkable {
         }
     }
     
-    func findAllElements() {
+    func getAll() {
         let operation = service.getAll()
         switch operation {
         case .success(let result):
@@ -92,7 +104,6 @@ final class KVStoreWorker: KVStoreWorkable {
     private func updateTransactionsByKey(oldTransactions: [String: String], newTransactions: [String: String]) {
         var stored = oldTransactions
         stored.merge(newTransactions) { (_, new) in new }
-        let operation = service.updateStore(items: stored)
         if case let .failure(error) = service.updateStore(items: stored) {
             sendError(error: error)
         }

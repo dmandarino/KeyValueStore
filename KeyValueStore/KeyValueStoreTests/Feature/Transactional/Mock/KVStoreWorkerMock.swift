@@ -9,14 +9,13 @@
 @testable import KeyValueStore
 
 class KVStoreWorkerMock: KVStoreWorkable {
-    var shouldPass: Bool = true
     var store: [String: String] = [:]
     
     var updateStoreCallCount = 0
     var setCallCount = 0
     var deleteCallCount = 0
-    var getCallCount = 0
-    var getAllCallCount = 0
+    var findCallCount = 0
+    var findAllElementsCallCount = 0
     
     func updateStore(with transactions: [String : String]) {
         updateStoreCallCount += 1
@@ -24,21 +23,17 @@ class KVStoreWorkerMock: KVStoreWorkable {
     
     func set(key: String, value: String) {
         setCallCount += 1
-        store[key] = value
     }
     
-    func delete(key: String) -> Bool {
+    func delete(by key: String) {
         deleteCallCount += 1
-        return shouldPass
     }
     
-    func get(key: String) -> String? {
-        getCallCount += 1
-        return shouldPass ? store[key] : nil
+    func get(by key: String) {
+        findCallCount += 1
     }
     
-    func getAll() -> [String : String] {
-        getAllCallCount += 1
-        return store
+    func getAll() {
+        findAllElementsCallCount += 1
     }
 }

@@ -10,6 +10,7 @@ import Foundation
 
 enum TransactionErrorReason {
     case keyNotFound
+    case emptyParameters
     case emptyKey
     case emptyValue
     case noStore
@@ -23,6 +24,7 @@ extension TransactionErrorReason {
         case .emptyKey: return .emptyKey
         case .keyNotFound: return .keyNotFound
         case .emptyValue: return .emptyValue
+        case .noStore: return .noStore
         default: return .unknown
         }
     }
