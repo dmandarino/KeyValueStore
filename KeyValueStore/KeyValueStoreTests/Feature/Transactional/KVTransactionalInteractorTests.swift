@@ -159,4 +159,41 @@ class KVTransactionalInteractorTests: XCTestCase {
         XCTAssertEqual(delegate.presentErrorCallCount, 1)
         XCTAssertEqual(delegate.error, .emptyParameters)
     }
+    
+    // MARK: - KVStoreWorkerDelegate
+    
+    func test_didGetValueForKey_shouldPresentSuccess() {
+        //Given
+        XCTAssertEqual(delegate.presentSuccessCallCount, 0)
+        
+        // When
+        interactor?.didGetValueForKey(value: "abc")
+        
+        // Then
+        XCTAssertEqual(delegate.presentSuccessCallCount, 1)
+        XCTAssertEqual(delegate.response, "abc")
+    }
+    
+    func test_didGetAllTransactions_shouldPresentSuccess() {
+        //Given
+        XCTAssertEqual(stackWorker.updateTransactionCallCount, 0)
+        
+        // When
+        interactor?.didGetAllTransactions(transactions: ["abc": "123"])
+        
+        // Then
+        XCTAssertEqual(stackWorker.updateTransactionCallCount, 1)
+    }
+    
+    func test_handleWithError_shouldPresentCorrectError() {
+        //Given
+        XCTAssertEqual(delegate.presentErrorCallCount, 0)
+        
+        // When
+        interactor?.handleWithError(error: .noTransaction)
+        
+        // Then
+        XCTAssertEqual(delegate.presentErrorCallCount, 1)
+        XCTAssertEqual(delegate.error, .noTransaction)
+    }
 }
