@@ -38,7 +38,6 @@ class KVTransactionalPresenter: ObservableObject, KVTransactionalPresentable, KV
     // MARK: - KVTransactionalPresentable
     
     func execute(transaction: SelectedMethod) {
-        response = ""
         switch transaction {
         case .BEGIN:
             interactor.begin()
@@ -49,19 +48,27 @@ class KVTransactionalPresenter: ObservableObject, KVTransactionalPresentable, KV
         default:
             return
         }
+        updateStackTrace(info: "> \(transaction.rawValue)")
     }
     
     func execute(method: SelectedMethod, key: String = "", value: String = "") {
-        response = ""
         switch method {
         case .SET:
-            interactor.set(key: key, value: value)
+            let command = "> \(method.rawValue) \(key.lowercased()) \(value.lowercased())"
+            updateStackTrace(info: command)
+            interactor.set(key: key.lowercased(), value: value.lowercased())
         case .GET:
-            interactor.get(key: key)
+            let command = "> \(method.rawValue) \(key.lowercased())"
+            updateStackTrace(info: command)
+            interactor.get(key: key.lowercased())
         case .DELETE:
-            interactor.delete(key: key)
+            let command = "> \(method.rawValue) \(key.lowercased())"
+            updateStackTrace(info: command)
+            interactor.delete(key: key.lowercased())
         case .COUNT:
-            interactor.count(value: value)
+            let command = "> \(method.rawValue) \(value.lowercased())"
+            updateStackTrace(info: command)
+            interactor.count(value: value.lowercased())
         default:
             break
         }
@@ -87,23 +94,29 @@ class KVTransactionalPresenter: ObservableObject, KVTransactionalPresentable, KV
     // MARK: - KVTransactionalInteractableDelegate
     
     func presentSuccess(response: String) {
-        self.response = response
+        updateStackTrace(info: response)
     }
     
     func presentError(error: TransactionErrorReason) {
         switch error {
         case .noTransaction:
-            self.response = ErrorConstants.noTransaction.rawValue
+            updateStackTrace(info: ErrorConstants.noTransaction.rawValue)
         case .keyNotFound:
-            self.response = ErrorConstants.keyNotFound.rawValue
+            updateStackTrace(info: ErrorConstants.keyNotFound.rawValue)
         case .emptyParameters, .emptyValue:
-            self.response = ErrorConstants.missingParameters.rawValue
+            updateStackTrace(info: ErrorConstants.missingParameters.rawValue)
         case .emptyKey:
-            self.response = ErrorConstants.missingKey.rawValue
+            updateStackTrace(info: ErrorConstants.missingKey.rawValue)
         case .noStore:
-            self.response = ErrorConstants.noStore.rawValue
+            updateStackTrace(info: ErrorConstants.noStore.rawValue)
         case .unknown:
-            self.response = ErrorConstants.unknown.rawValue
+            updateStackTrace(info: ErrorConstants.unknown.rawValue)
         }
+    }
+    
+    // MARK: - Private Methods
+    
+    private func updateStackTrace(info: String) {
+        self.response += "\n\(info)"
     }
 }

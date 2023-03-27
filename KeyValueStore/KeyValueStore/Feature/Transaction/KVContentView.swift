@@ -101,15 +101,13 @@ struct KVContentView<T>: View where T: KVTransacionalModule {
                              secondaryButton: .destructive(Text("Cancel")))
                 return alert
             }
+            Section(header: Text("Stack Trace")) {
+                ScrollView {
+                    Text(presenter.response)
+                        .fontWeight(.medium)
+                        .multilineTextAlignment(.leading)
+                }
+            }
         }
-        VStack {
-            Text(presenter.response)
-//                .alert(item: $presenter.$response) { response in
-//                            Alert(title: Text("response"), dismissButton: .default())
-//                        }
-        }
-//        .alert(item: presenter.response) { response in
-//            Alert(title: Text("response"), dismissButton: .default())
-//        }
     }
 }
