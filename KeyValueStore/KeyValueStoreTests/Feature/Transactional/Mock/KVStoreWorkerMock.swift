@@ -9,6 +9,8 @@
 @testable import KeyValueStore
 
 class KVStoreWorkerMock: KVStoreWorkable {
+    var delegate: KeyValueStore.KVStoreWorkerDelegate?
+    
     var expectedStore: [String: String] = [:]
     var expectedValue = ""
     var shouldFail = false
@@ -50,4 +52,9 @@ class KVStoreWorkerMock: KVStoreWorkable {
     func count(for value: String) {
         countCallCount += 1
     }
+    
+    func overrideStore(with transactions: [String : String]) {
+        
+    }
+    
 }

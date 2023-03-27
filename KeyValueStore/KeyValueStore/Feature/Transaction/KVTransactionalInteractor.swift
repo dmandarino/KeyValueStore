@@ -15,6 +15,7 @@ protocol KVTransacional {
 }
 
 protocol KVTransactionalInteractable: KVTransacional {
+    var delegate: KVTransactionalPresentable? { get set }
     func set(key: String, value: String)
     func delete(key: String)
     func get(key: String)
@@ -98,7 +99,12 @@ final class KVTransactionalInteractor: KVTransactionalInteractable {
     }
 
     func rollback() {
-        if case .failure(let error) = stackWorker.rollback() {
+        let result = stackWorker.rollback()
+        switch result {
+        case .success(let transaction):
+            guard let transaction else { return }
+            storeWorker.overrideStore(with: transaction.items)
+        case .failure(let error):
             delegate?.presentError(error: error)
         }
     }

@@ -231,7 +231,7 @@ class KVTransactionalInteractorTests: XCTestCase {
     
     func test_commit_shouldUpdateStore() {
         //Given
-        stackWorker.transaction = KVTransaction(items: ["abc": "123"])
+        stackWorker.transaction = KVTransactionModel(items: ["abc": "123"])
         XCTAssertEqual(stackWorker.commitCallCount, 0)
         XCTAssertEqual(storeWorker.updateStoreCallCount, 0)
 

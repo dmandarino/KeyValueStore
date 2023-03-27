@@ -13,8 +13,8 @@ class KVStackWorkerMock: KVStackWorkable {
     var error: TransactionErrorReason? = .none
     var successString = ""
     var successInt = 0
-    var transactions: [KVTransaction] = []
-    var transaction: KVTransaction?
+    var transactions: [KVTransactionModel] = []
+    var transaction: KVTransactionModel?
     
     var beginCallCount = 0
     var commitCallCount = 0
@@ -23,23 +23,23 @@ class KVStackWorkerMock: KVStackWorkable {
     
     func begin(transientTransaction: [String : String]) {
         beginCallCount += 1
-        transaction = KVTransaction(items: transientTransaction)
+        transaction = KVTransactionModel(items: transientTransaction)
     }
     
-    func commit() -> Result<KeyValueStore.KVTransaction, KeyValueStore.TransactionErrorReason> {
+    func commit() -> Result<KeyValueStore.KVTransactionModel, KeyValueStore.TransactionErrorReason> {
         commitCallCount += 1
         return shouldFail ? .failure(error!) : .success(transaction!)
     }
     
-    func rollback() -> Result<Void, KeyValueStore.TransactionErrorReason> {
+    func rollback() -> Result<KVTransactionModel?, TransactionErrorReason> {
         rollbackCallCount += 1
-        return shouldFail ? .failure(error!) : .success(())
+        return shouldFail ? .failure(error!) : .success(transaction)
     }
     
     func updateTransaction(items: [String : String]) {
         updateTransactionCallCount += 1
         if !shouldFail {
-            let transaction = KVTransaction(items: items)
+            let transaction = KVTransactionModel(items: items)
             self.transaction = transaction
         }
     }

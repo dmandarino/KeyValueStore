@@ -42,6 +42,7 @@
 		FF98A39229D109590032A6C9 /* KVStoreWorkerDelegateMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF98A39129D109590032A6C9 /* KVStoreWorkerDelegateMock.swift */; };
 		FF98A39629D1589C0032A6C9 /* KVStackBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF98A39529D1589C0032A6C9 /* KVStackBuilder.swift */; };
 		FF98A39829D15AFB0032A6C9 /* KVStoreBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF98A39729D15AFB0032A6C9 /* KVStoreBuilder.swift */; };
+		FF98A39A29D160610032A6C9 /* TransactionalPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF98A39929D160610032A6C9 /* TransactionalPresenter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -103,6 +104,7 @@
 		FF98A39129D109590032A6C9 /* KVStoreWorkerDelegateMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KVStoreWorkerDelegateMock.swift; sourceTree = "<group>"; };
 		FF98A39529D1589C0032A6C9 /* KVStackBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KVStackBuilder.swift; sourceTree = "<group>"; };
 		FF98A39729D15AFB0032A6C9 /* KVStoreBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KVStoreBuilder.swift; sourceTree = "<group>"; };
+		FF98A39929D160610032A6C9 /* TransactionalPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionalPresenter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,13 +132,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		5A2BF57D29CE44600003546D /* Worker */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Worker;
-			sourceTree = "<group>";
-		};
 		5A2BF58129CE46770003546D /* Service */ = {
 			isa = PBXGroup;
 			children = (
@@ -270,10 +265,10 @@
 			isa = PBXGroup;
 			children = (
 				5AC6632129CCEE9B0013DB75 /* TransactionErrorReason.swift */,
-				5A2BF57D29CE44600003546D /* Worker */,
-				5A92FFF329CCD90000714FAF /* KVTransactionalInteractor.swift */,
-				5A92FFF529CCE00000714FAF /* KVTransactionalBuilder.swift */,
 				5AE486AF29CDF5520082B436 /* TransactionMethods.swift */,
+				5A92FFF529CCE00000714FAF /* KVTransactionalBuilder.swift */,
+				FF98A39929D160610032A6C9 /* TransactionalPresenter.swift */,
+				5A92FFF329CCD90000714FAF /* KVTransactionalInteractor.swift */,
 			);
 			path = Transaction;
 			sourceTree = "<group>";
@@ -492,6 +487,7 @@
 				5A7C943A29CB6DD200F2B631 /* KVStoreService.swift in Sources */,
 				5A7056DE29CC00B800034264 /* TransactionModel.swift in Sources */,
 				5A7C944429CB7F1100F2B631 /* StringExtension.swift in Sources */,
+				FF98A39A29D160610032A6C9 /* TransactionalPresenter.swift in Sources */,
 				5A7C940729CB6BD200F2B631 /* AppDelegate.swift in Sources */,
 				5A7056DA29CBF8F900034264 /* KVStackWorker.swift in Sources */,
 				5A7C940929CB6BD200F2B631 /* SceneDelegate.swift in Sources */,

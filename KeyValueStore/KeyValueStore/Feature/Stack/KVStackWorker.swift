@@ -10,34 +10,36 @@ import Foundation
 
 protocol KVStackWorkable {
     func begin(transientTransaction: [String : String])
-    func commit() -> Result<KVTransaction, TransactionErrorReason>
-    func rollback() -> Result<Void, TransactionErrorReason>
+    func commit() -> Result<KVTransactionModel, TransactionErrorReason>
+    func rollback() -> Result<KVTransactionModel?, TransactionErrorReason>
     func updateTransaction(items: [String : String])
 }
 
 class KVStackWorker: KVStackWorkable {
 
     // MARK: - Private Variables
-    private(set) var transactions: [KVTransaction] = []
+    private(set) var transactions: [KVTransactionModel] = []
     
     // MARK: - Init
     
-    init() {}
+    init() {
+        config()
+    }
     
-    convenience init(transactions: [KVTransaction]) {
+    convenience init(transactions: [KVTransactionModel]) {
         self.init()
-        self.transactions = transactions
+        self.transactions.append(contentsOf: transactions)
     }
     
     // MARK: - KVStackWorkable
     
     func begin(transientTransaction: [String : String]) {
-        let transaction = KVTransaction(items: transientTransaction)
+        let transaction = KVTransactionModel(items: transientTransaction)
         transactions.append(transaction)
     }
     
-    func commit() -> Result<KVTransaction, TransactionErrorReason> {
-        guard let transaction = removeLastTransaction() else {
+    func commit() -> Result<KVTransactionModel, TransactionErrorReason> {
+        guard let transaction = removeLastTransaction(), transactions.count > 0 else {
             return .failure(.noTransaction)
         }
         if let previousTransaction = transactions.last {
@@ -46,11 +48,12 @@ class KVStackWorker: KVStackWorkable {
         return .success(transaction)
     }
     
-    func rollback() -> Result<Void, TransactionErrorReason> {
-        guard removeLastTransaction() != nil else {
+    func rollback() -> Result<KVTransactionModel?, TransactionErrorReason> {
+        guard removeLastTransaction() != nil, transactions.count > 0 else {
             return .failure(.noTransaction)
         }
-        return .success(())
+        let lastTransaction = transactions.last
+        return .success(lastTransaction)
     }
     
     func updateTransaction(items: [String : String]) {
@@ -60,17 +63,22 @@ class KVStackWorker: KVStackWorkable {
     
     // MARK: - Private Methods
     
-    private func removeLastTransaction() -> KVTransaction? {
+    private func removeLastTransaction() -> KVTransactionModel? {
         guard !transactions.isEmpty else {
             return nil
         }
         return transactions.removeLast()
     }
     
-    private func mergeTransaction(transaction: KVTransaction, in previousTransaction: KVTransaction) {
+    private func mergeTransaction(transaction: KVTransactionModel, in previousTransaction: KVTransactionModel) {
         var items = previousTransaction.items
         items.merge(transaction.items) { (_, new) in new }
         transactions.removeLast()
-        transactions.append(KVTransaction(items: items))
+        transactions.append(KVTransactionModel(items: items))
+    }
+    
+    private func config() {
+        let transaction = KVTransactionModel(items: [:])
+        self.transactions = [transaction]
     }
 }

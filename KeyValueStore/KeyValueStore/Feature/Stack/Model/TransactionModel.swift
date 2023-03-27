@@ -14,7 +14,7 @@ protocol KVTransactional {
     func updateItems(with items: [String : String])
 }
 
-class KVTransaction: KVTransactional {
+class KVTransactionModel: KVTransactional {
     
     var items: [String : String]
     
@@ -27,8 +27,8 @@ class KVTransaction: KVTransactional {
     }
 }
 
-extension KVTransaction: Equatable {
-    static func == (lhs: KVTransaction, rhs: KVTransaction) -> Bool {
+extension KVTransactionModel: Equatable {
+    static func == (lhs: KVTransactionModel, rhs: KVTransactionModel) -> Bool {
         lhs.items == rhs.items
     }
 }

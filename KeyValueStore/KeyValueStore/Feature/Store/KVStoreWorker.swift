@@ -14,7 +14,9 @@ protocol KVStoreWorkerDelegate: AnyObject {
 }
 
 protocol KVStoreWorkable {
+    var delegate: KVStoreWorkerDelegate? { get set }
     func updateStore(with transactions: [String: String])
+    func overrideStore(with transactions: [String: String])
     func set(key: String, value: String)
     func delete(by key: String)
     func get(by key: String)
@@ -26,7 +28,7 @@ final class KVStoreWorker: KVStoreWorkable {
     
     // MARK: - Public Variables
     
-    var delegate: KVStoreWorkerDelegate?
+    weak var delegate: KVStoreWorkerDelegate?
     
     // MARK: - Private Variables
     
@@ -45,6 +47,18 @@ final class KVStoreWorker: KVStoreWorkable {
         switch result {
         case .success(let oldTransactions):
             updateTransactionsByKey(oldTransactions: oldTransactions, newTransactions: transactions)
+        case .failure(let error):
+            sendError(error: error)
+        }
+    }
+    
+    func overrideStore(with transactions: [String: String]) {
+        let result = service.getAll()
+        switch result {
+        case .success(_):
+            if case let .failure(error) = service.updateStore(items: transactions) {
+                sendError(error: error)
+            }
         case .failure(let error):
             sendError(error: error)
         }
