@@ -12,7 +12,7 @@ protocol KVStacking {
     var items: [[KVTransactional]] { get }
 }
 
-final class KVStack: KVStacking {
+final class KVStackModel: KVStacking {
     
     var items: [[KVTransactional]]
     

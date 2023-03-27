@@ -14,23 +14,23 @@ protocol KVTransacional {
     func rollback()
 }
 
-protocol KVTransactInteractable: KVTransacional {
+protocol KVTransactionalInteractable: KVTransacional {
     func set(key: String, value: String)
     func delete(key: String)
     func get(key: String)
     func count(value: String)
 }
 
-protocol KVTransactPresentable: AnyObject {
+protocol KVTransactionalPresentable: AnyObject {
     func presentSuccess(response: String)
     func presentError(error: TransactionErrorReason)
 }
 
-final class KVTransactionalInteractor: KVTransactInteractable {
+final class KVTransactionalInteractor: KVTransactionalInteractable {
     
     // MARK: - Variables
     
-    weak var delegate: KVTransactPresentable?
+    weak var delegate: KVTransactionalPresentable?
     private var storeWorker: KVStoreWorkable
     private var stackWorker: KVStackWorkable
     

@@ -18,7 +18,7 @@ protocol KVStoring {
     func delete(by key: String) -> String?
 }
 
-final class KVStore: KVStoring {
+final class KVStoreModel: KVStoring {
 
     private var items: [String: String]
     

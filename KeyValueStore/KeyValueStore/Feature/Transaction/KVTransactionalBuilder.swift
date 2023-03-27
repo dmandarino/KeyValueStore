@@ -8,27 +8,27 @@
 
 import Foundation
 
-//protocol KVTransacionalDependencies {
-//    var storeService: KVTransactionServicing { get }
-//    var stackService: KVStackWorkable { get }
-//}
-//
-//protocol KVTransactionalBuildable {
-//    func build() -> KVTransactInteractable
-//}
-//
-//struct KVTransactionalBuilder: KVTransacionalDependencies {
-//    
-//    var storeService: KVTransactionServicing {
-//        KVTransactionBuilder.build()
-//    }
-//    
-//    var stackService: KVStackWorkable {
-//        KVStackWorker()
-//    }
-//    
-//    func build() -> KVTransactInteractable {
-//        let interactor = KVTransactionalInteractor(storeService: storeService, stackService: stackService)
-//        return interactor
-//    }
-//}
+protocol KVTransacionalDependencies {
+    var kvStore: KVStore { get }
+    var kvStack: KVStack { get }
+}
+
+protocol KVTransactionalBuildable: KVTransacionalDependencies {
+    func build() -> KVTransactionalInteractable
+}
+
+struct KVTransactionalBuilder: KVTransactionalBuildable {
+    
+    var kvStore: KVStore {
+        KVStoreBuilder.build()
+    }
+    
+    var kvStack: KVStack {
+        KVStackBuilder.build()
+    }
+    
+    func build() -> KVTransactionalInteractable {
+        let interactor = KVTransactionalInteractor(storeWorker: kvStore, stackWorker: kvStack)
+        return interactor
+    }
+}
