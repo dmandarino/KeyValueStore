@@ -20,6 +20,7 @@ protocol KVTransactionalInteractable: KVTransacional {
     func delete(key: String)
     func get(key: String)
     func count(value: String)
+    func clearAll()
 }
 
 protocol KVTransactionalInteractableDelegate: AnyObject {
@@ -76,6 +77,11 @@ final class KVTransactionalInteractor: KVTransactionalInteractable {
             return
         }
         storeWorker.count(for: value)
+    }
+    
+    func clearAll() {
+        storeWorker.overrideStore(with: [:])
+        stackWorker.clearAll()
     }
 
     // MARK: - Stack

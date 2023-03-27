@@ -79,6 +79,15 @@ struct KVContentView<T>: View where T: KVTransacionalModule {
                 }
                 presenter.execute(freeForm: command)
             })
+            Button("Reset Everything", action: {
+                showingAlert = true
+            }).foregroundColor(Color.red)
+                .alert("Are you sure?", isPresented: $showingAlert) {
+                    Button("Cancel", role: .cancel) { }
+                    Button("Yes", role: .destructive) {
+                        presenter.clearAll()
+                    }
+                }
             Section(header: Text("Transaction")) {
                 Button(SelectedMethod.BEGIN.rawValue) {
                     transactionalMethod = TransactionalChanged(method: .BEGIN)
@@ -95,18 +104,16 @@ struct KVContentView<T>: View where T: KVTransacionalModule {
                 let messate = "Do you want to proceed?"
                 let alert = Alert(title: title,
                                   message: Text(messate),
-                             primaryButton: .default(Text("Continue")) {
+                                  primaryButton: .destructive(Text("Cancel")) {
                     presenter.execute(transaction: method)
                 },
-                             secondaryButton: .destructive(Text("Cancel")))
+                                  secondaryButton: .default(Text("Continue")))
                 return alert
             }
             Section(header: Text("Stack Trace")) {
-                ScrollView {
-                    Text(presenter.response)
-                        .fontWeight(.medium)
-                        .multilineTextAlignment(.leading)
-                }
+                Text(presenter.response)
+                    .fontWeight(.medium)
+                    .multilineTextAlignment(.leading)
             }
         }
     }

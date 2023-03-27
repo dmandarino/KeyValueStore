@@ -10,3 +10,6 @@ xcuserdata/
 !*.xcworkspace/contents.xcworkspacedata
 /*.gcno
 **/xcshareddata/WorkspaceSettings.xcsettings
+KeyValueStore/KeyValueStore.xcodeproj/xcshareddata/*
+KeyValueStore/KeyValueStore.xcodeproj/project.pbxprj
+KeyValueStore/KeyValueStore.xcodeproj/*

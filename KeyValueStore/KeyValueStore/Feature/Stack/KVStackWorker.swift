@@ -13,6 +13,7 @@ protocol KVStackWorkable {
     func commit() -> Result<KVTransactionModel, TransactionErrorReason>
     func rollback() -> Result<KVTransactionModel?, TransactionErrorReason>
     func updateTransaction(items: [String : String])
+    func clearAll()
 }
 
 class KVStackWorker: KVStackWorkable {
@@ -59,6 +60,11 @@ class KVStackWorker: KVStackWorkable {
     func updateTransaction(items: [String : String]) {
         guard !transactions.isEmpty else { return }
         transactions.last?.updateItems(with: items)
+    }
+    
+    func clearAll() {
+        transactions = []
+        config()
     }
     
     // MARK: - Private Methods

@@ -13,6 +13,7 @@ protocol KVTransactionalPresentable: ObservableObject {
     func execute(transaction: SelectedMethod)
     func execute(method: SelectedMethod, key: String, value: String)
     func execute(freeForm: String)
+    func clearAll()
 }
 
 class KVTransactionalPresenter: ObservableObject, KVTransactionalPresentable, KVTransactionalInteractableDelegate {
@@ -75,6 +76,7 @@ class KVTransactionalPresenter: ObservableObject, KVTransactionalPresentable, KV
     }
     
     func execute(freeForm: String) {
+        updateStackTrace(info: "> \(freeForm)")
         let inputs = freeForm.components(separatedBy: " ").map { $0.lowercased() }
         guard let command = inputs.first, inputs.count <= 3 else {
             self.response = ErrorConstants.sintaxError.rawValue
@@ -82,6 +84,9 @@ class KVTransactionalPresenter: ObservableObject, KVTransactionalPresentable, KV
         }
         if command == "set" {
             interactor.set(key: inputs[1], value: inputs[2])
+        } else if inputs.count > 2 {
+            self.response = ErrorConstants.sintaxError.rawValue
+            return
         } else if command == "get" {
             interactor.get(key: inputs[1])
         } else if command == "count" {
@@ -89,6 +94,11 @@ class KVTransactionalPresenter: ObservableObject, KVTransactionalPresentable, KV
         } else if command == "delete" {
             interactor.delete(key: inputs[1])
         }
+    }
+    
+    func clearAll() {
+        interactor.clearAll()
+        self.response = ""
     }
     
     // MARK: - KVTransactionalInteractableDelegate
