@@ -131,11 +131,10 @@ class KVStoreWorkerTests: XCTestCase {
         worker?.delegate = delegate
 
         //When
-        worker?.getAll()
+        let result = worker?.getAll()
     
         //Then
-        XCTAssertEqual(delegate.expectedTransactions, ["foo":"123", "bar":"456", "blz":"abc", "xpto":"456"])
-        XCTAssertEqual(delegate.didGetAllTransactionsCallCount, 1)
+        XCTAssertEqual(result, ["foo":"123", "bar":"456", "blz":"abc", "xpto":"456"])
         XCTAssertEqual(serviceMock.updateStoreCallCount, 0)
         XCTAssertEqual(serviceMock.getAllCallCount, 1)
     }
@@ -145,11 +144,10 @@ class KVStoreWorkerTests: XCTestCase {
         XCTAssertEqual(serviceMock.items, [:])
 
         //When
-        worker?.getAll()
+        let result = worker?.getAll()
     
         //Then
-        XCTAssertEqual(delegate.expectedTransactions, [:])
-        XCTAssertEqual(delegate.didGetAllTransactionsCallCount, 1)
+        XCTAssertEqual(result, [:])
         XCTAssertEqual(delegate.handleWithErrorCallCount, 0)
         XCTAssertEqual(serviceMock.getAllCallCount, 1)
     }
@@ -160,11 +158,10 @@ class KVStoreWorkerTests: XCTestCase {
         serviceMock.shouldFail = true
 
         //When
-        worker?.getAll()
+        let result = worker?.getAll()
     
         //Then
-        XCTAssertEqual(delegate.expectedTransactions, [:])
-        XCTAssertEqual(delegate.didGetAllTransactionsCallCount, 0)
+        XCTAssertNil(result)
         XCTAssertEqual(delegate.handleWithErrorCallCount, 1)
         XCTAssertEqual(delegate.expectedError, .noStore)
         XCTAssertEqual(serviceMock.getAllCallCount, 1)

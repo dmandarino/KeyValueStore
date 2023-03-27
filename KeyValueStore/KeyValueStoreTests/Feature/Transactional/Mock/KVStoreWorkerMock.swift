@@ -9,7 +9,6 @@
 @testable import KeyValueStore
 
 class KVStoreWorkerMock: KVStoreWorkable {
-    var store: [String: String] = [:]
     var expectedStore: [String: String] = [:]
     var expectedValue = ""
     var shouldFail = false
@@ -24,14 +23,14 @@ class KVStoreWorkerMock: KVStoreWorkable {
     func updateStore(with transactions: [String : String]) {
         updateStoreCallCount += 1
         if !shouldFail {
-            store = transactions
+            expectedStore = transactions
         }
     }
     
     func set(key: String, value: String) {
         setCallCount += 1
         if !shouldFail {
-            store[key] = value
+            expectedStore[key] = value
         }
     }
     
@@ -43,8 +42,9 @@ class KVStoreWorkerMock: KVStoreWorkable {
         getCallCount += 1
     }
     
-    func getAll() {
+    func getAll() -> [String : String]? {
         getAllCallCount += 1
+        return shouldFail ? nil : expectedStore
     }
     
     func count(for value: String) {

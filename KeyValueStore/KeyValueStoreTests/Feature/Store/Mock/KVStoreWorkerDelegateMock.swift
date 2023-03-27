@@ -11,20 +11,13 @@
 final class KVStoreWorkerDelegateMock: KVStoreWorkerDelegate {
     var expectedError: TransactionErrorReason? = .none
     var expectedValue = ""
-    var expectedTransactions: [String: String] = [:]
     
     var didGetValueForKeyCallCount = 0
-    var didGetAllTransactionsCallCount = 0
     var handleWithErrorCallCount = 0
     
     func didGetValueForKey(value: String) {
         didGetValueForKeyCallCount += 1
         expectedValue = value
-    }
-    
-    func didGetAllTransactions(transactions: [String : String]) {
-        didGetAllTransactionsCallCount += 1
-        expectedTransactions = transactions
     }
     
     func handleWithError(error: KeyValueStore.TransactionErrorReason) {

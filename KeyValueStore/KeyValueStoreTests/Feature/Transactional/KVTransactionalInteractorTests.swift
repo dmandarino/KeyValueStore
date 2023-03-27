@@ -32,7 +32,7 @@ class KVTransactionalInteractorTests: XCTestCase {
         
         // Then
         XCTAssertEqual(storeWorker.setCallCount, 1)
-        XCTAssertEqual(storeWorker.store, ["abc": "123"])
+        XCTAssertEqual(storeWorker.expectedStore, ["abc": "123"])
     }
     
     func test_setKeyValueWhenShouldFail_callDelegateToPresentErorr() {
@@ -46,7 +46,7 @@ class KVTransactionalInteractorTests: XCTestCase {
         
         // Then
         XCTAssertEqual(storeWorker.setCallCount, 1)
-        XCTAssertEqual(storeWorker.store, [:])
+        XCTAssertEqual(storeWorker.expectedStore, [:])
     }
     
     func test_setKeyEmptyKey_shouldFail() {
@@ -120,7 +120,6 @@ class KVTransactionalInteractorTests: XCTestCase {
     
     func test_deleteValue_whenFails_shoulPresentError() {
         //Given
-        storeWorker.store = ["abc": "123"]
         XCTAssertEqual(storeWorker.deleteCallCount, 0)
         XCTAssertEqual(delegate.presentSuccessCallCount, 0)
         storeWorker.shouldFail = true
@@ -130,7 +129,6 @@ class KVTransactionalInteractorTests: XCTestCase {
         
         // Then
         XCTAssertEqual(storeWorker.deleteCallCount, 1)
-        XCTAssertEqual(storeWorker.store, ["abc": "123"])
     }
     
     //MARK: - COUNT
@@ -172,17 +170,6 @@ class KVTransactionalInteractorTests: XCTestCase {
         // Then
         XCTAssertEqual(delegate.presentSuccessCallCount, 1)
         XCTAssertEqual(delegate.response, "abc")
-    }
-    
-    func test_didGetAllTransactions_shouldPresentSuccess() {
-        //Given
-        XCTAssertEqual(stackWorker.updateTransactionCallCount, 0)
-        
-        // When
-        interactor?.didGetAllTransactions(transactions: ["abc": "123"])
-        
-        // Then
-        XCTAssertEqual(stackWorker.updateTransactionCallCount, 1)
     }
     
     func test_handleWithError_shouldPresentCorrectError() {

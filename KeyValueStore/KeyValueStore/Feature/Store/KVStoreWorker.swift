@@ -10,7 +10,6 @@ import Foundation
 
 protocol KVStoreWorkerDelegate: AnyObject {
     func didGetValueForKey(value: String)
-    func didGetAllTransactions(transactions: [String: String])
     func handleWithError(error: TransactionErrorReason)
 }
 
@@ -20,7 +19,7 @@ protocol KVStoreWorkable {
     func delete(by key: String)
     func get(by key: String)
     func count(for value: String)
-    func getAll()
+    func getAll() -> [String : String]?
 }
 
 final class KVStoreWorker: KVStoreWorkable {
@@ -85,14 +84,15 @@ final class KVStoreWorker: KVStoreWorkable {
         }
     }
     
-    func getAll() {
+    func getAll() -> [String : String]? {
         let operation = service.getAll()
         switch operation {
         case .success(let result):
-            delegate?.didGetAllTransactions(transactions: result)
+            return result
         case .failure(let error):
             sendError(error: error)
         }
+        return nil
     }
     
     func count(for value: String) {
