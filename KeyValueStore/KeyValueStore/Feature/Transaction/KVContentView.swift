@@ -73,7 +73,11 @@ struct KVContentView<T>: View where T: KVTransacionalModule {
                 }
             }
             Button("Submit", action: {
-                presenter.execute(method: preferredMethod, key: key, value: value)
+                guard case .freeForm = selectionInputStyle else {
+                    presenter.execute(method: preferredMethod, key: key, value: value)
+                    return
+                }
+                presenter.execute(freeForm: command)
             })
             Section(header: Text("Transaction")) {
                 Button(SelectedMethod.BEGIN.rawValue) {

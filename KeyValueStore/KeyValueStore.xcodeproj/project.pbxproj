@@ -267,8 +267,8 @@
 				5AC6632129CCEE9B0013DB75 /* TransactionErrorReason.swift */,
 				5AE486AF29CDF5520082B436 /* TransactionMethods.swift */,
 				5A92FFF529CCE00000714FAF /* KVTransactionalBuilder.swift */,
-				FF98A39929D160610032A6C9 /* KVTransactionalPresenter.swift */,
 				5A92FFF329CCD90000714FAF /* KVTransactionalInteractor.swift */,
+				FF98A39929D160610032A6C9 /* KVTransactionalPresenter.swift */,
 				5A7C940A29CB6BD200F2B631 /* KVContentView.swift */,
 			);
 			path = Transaction;

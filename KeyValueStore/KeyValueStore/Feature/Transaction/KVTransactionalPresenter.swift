@@ -12,6 +12,7 @@ protocol KVTransactionalPresentable: ObservableObject {
     var response: String { get }
     func execute(transaction: SelectedMethod)
     func execute(method: SelectedMethod, key: String, value: String)
+    func execute(freeForm: String)
 }
 
 class KVTransactionalPresenter: ObservableObject, KVTransactionalPresentable, KVTransactionalInteractableDelegate {
@@ -24,6 +25,7 @@ class KVTransactionalPresenter: ObservableObject, KVTransactionalPresentable, KV
         case missingParameters = "missing parameters"
         case missingKey = "missing key"
         case noStore = "no store"
+        case sintaxError = "sintax error"
         case unknown = "unexpected error"
     }
     
@@ -62,6 +64,23 @@ class KVTransactionalPresenter: ObservableObject, KVTransactionalPresentable, KV
             interactor.count(value: value)
         default:
             break
+        }
+    }
+    
+    func execute(freeForm: String) {
+        let inputs = freeForm.components(separatedBy: " ").map { $0.lowercased() }
+        guard let command = inputs.first, inputs.count <= 3 else {
+            self.response = ErrorConstants.sintaxError.rawValue
+            return
+        }
+        if command == "set" {
+            interactor.set(key: inputs[1], value: inputs[2])
+        } else if command == "get" {
+            interactor.get(key: inputs[1])
+        } else if command == "count" {
+            interactor.count(value: inputs[1])
+        } else if command == "delete" {
+            interactor.delete(key: inputs[1])
         }
     }
     
