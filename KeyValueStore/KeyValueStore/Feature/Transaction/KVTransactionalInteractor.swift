@@ -15,14 +15,14 @@ protocol KVTransacional {
 }
 
 protocol KVTransactionalInteractable: KVTransacional {
-    var delegate: KVTransactionalPresentable? { get set }
+    var delegate: KVTransactionalInteractableDelegate? { get set }
     func set(key: String, value: String)
     func delete(key: String)
     func get(key: String)
     func count(value: String)
 }
 
-protocol KVTransactionalPresentable: AnyObject {
+protocol KVTransactionalInteractableDelegate: AnyObject {
     func presentSuccess(response: String)
     func presentError(error: TransactionErrorReason)
 }
@@ -31,7 +31,7 @@ final class KVTransactionalInteractor: KVTransactionalInteractable {
     
     // MARK: - Variables
     
-    weak var delegate: KVTransactionalPresentable?
+    weak var delegate: KVTransactionalInteractableDelegate?
     private var storeWorker: KVStoreWorkable
     private var stackWorker: KVStackWorkable
     

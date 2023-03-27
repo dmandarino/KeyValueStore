@@ -8,12 +8,15 @@
 
 import Foundation
 
-public enum METHOD {
+public enum TransactionalMethod: String {
+    case BEGIN
+    case COMMIT
+    case ROLLBACK
+}
+
+public enum SelectedMethod {
     case DELETE
     case SET
     case GET
     case COUNT
-    case BEGIN
-    case COMMIT
-    case ROLLBACK
 }

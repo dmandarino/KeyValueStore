@@ -104,7 +104,7 @@ class KVTransactionIntegrationTests: XCTestCase {
         XCTAssertEqual(delegate.response, "123")
     }
     
-    private class InteractorDelegateMock: KVTransactionalPresentable {
+    private class InteractorDelegateMock: KVTransactionalInteractableDelegate {
         var response = ""
         var error: TransactionErrorReason? = .none
         

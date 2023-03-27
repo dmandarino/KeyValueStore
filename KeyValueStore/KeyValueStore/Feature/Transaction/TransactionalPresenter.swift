@@ -8,7 +8,11 @@
 
 import Foundation
 
-class KVTransactionalPresenter: KVTransactionalPresentable {
+protocol KVTransactionalPresentable {
+    
+}
+
+class KVTransactionalPresenter: KVTransactionalInteractableDelegate {
     
     private var interactor: KVTransactionalInteractable
     
@@ -16,7 +20,7 @@ class KVTransactionalPresenter: KVTransactionalPresentable {
         self.interactor = interactor
     }
     
-    // MARK: - KVTransactionalPresentable
+    // MARK: - KVTransactionalInteractableDelegate
     
     func presentSuccess(response: String) {
         

@@ -8,7 +8,7 @@
 
 @testable import KeyValueStore
 
-public class KVTransactPresentableMock: KVTransactionalPresentable {
+public class KVTransactPresentableMock: KVTransactionalInteractableDelegate {
    
     public var presentSuccessCallCount = 0
     public var presentErrorCallCount = 0
