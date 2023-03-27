@@ -16,7 +16,7 @@
 		5A7056DE29CC00B800034264 /* TransactionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7056DD29CC00B800034264 /* TransactionModel.swift */; };
 		5A7C940729CB6BD200F2B631 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7C940629CB6BD200F2B631 /* AppDelegate.swift */; };
 		5A7C940929CB6BD200F2B631 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7C940829CB6BD200F2B631 /* SceneDelegate.swift */; };
-		5A7C940B29CB6BD200F2B631 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7C940A29CB6BD200F2B631 /* ContentView.swift */; };
+		5A7C940B29CB6BD200F2B631 /* KVContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7C940A29CB6BD200F2B631 /* KVContentView.swift */; };
 		5A7C940D29CB6BD800F2B631 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5A7C940C29CB6BD800F2B631 /* Assets.xcassets */; };
 		5A7C941029CB6BD800F2B631 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5A7C940F29CB6BD800F2B631 /* Preview Assets.xcassets */; };
 		5A7C941329CB6BD800F2B631 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5A7C941129CB6BD800F2B631 /* LaunchScreen.storyboard */; };
@@ -42,7 +42,7 @@
 		FF98A39229D109590032A6C9 /* KVStoreWorkerDelegateMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF98A39129D109590032A6C9 /* KVStoreWorkerDelegateMock.swift */; };
 		FF98A39629D1589C0032A6C9 /* KVStackBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF98A39529D1589C0032A6C9 /* KVStackBuilder.swift */; };
 		FF98A39829D15AFB0032A6C9 /* KVStoreBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF98A39729D15AFB0032A6C9 /* KVStoreBuilder.swift */; };
-		FF98A39A29D160610032A6C9 /* TransactionalPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF98A39929D160610032A6C9 /* TransactionalPresenter.swift */; };
+		FF98A39A29D160610032A6C9 /* KVTransactionalPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF98A39929D160610032A6C9 /* KVTransactionalPresenter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,7 +73,7 @@
 		5A7C940329CB6BD200F2B631 /* KeyValueStore.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KeyValueStore.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A7C940629CB6BD200F2B631 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5A7C940829CB6BD200F2B631 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		5A7C940A29CB6BD200F2B631 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		5A7C940A29CB6BD200F2B631 /* KVContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KVContentView.swift; sourceTree = "<group>"; };
 		5A7C940C29CB6BD800F2B631 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5A7C940F29CB6BD800F2B631 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		5A7C941229CB6BD800F2B631 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -104,7 +104,7 @@
 		FF98A39129D109590032A6C9 /* KVStoreWorkerDelegateMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KVStoreWorkerDelegateMock.swift; sourceTree = "<group>"; };
 		FF98A39529D1589C0032A6C9 /* KVStackBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KVStackBuilder.swift; sourceTree = "<group>"; };
 		FF98A39729D15AFB0032A6C9 /* KVStoreBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KVStoreBuilder.swift; sourceTree = "<group>"; };
-		FF98A39929D160610032A6C9 /* TransactionalPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionalPresenter.swift; sourceTree = "<group>"; };
+		FF98A39929D160610032A6C9 /* KVTransactionalPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KVTransactionalPresenter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -198,7 +198,6 @@
 				5A7056D529CBB42B00034264 /* Feature */,
 				5A7C944229CB7EFC00F2B631 /* Helper */,
 				5A7C940829CB6BD200F2B631 /* SceneDelegate.swift */,
-				5A7C940A29CB6BD200F2B631 /* ContentView.swift */,
 				5A7056D229CBB12800034264 /* Foundation */,
 				5A7C940E29CB6BD800F2B631 /* Preview Content */,
 			);
@@ -268,8 +267,9 @@
 				5AC6632129CCEE9B0013DB75 /* TransactionErrorReason.swift */,
 				5AE486AF29CDF5520082B436 /* TransactionMethods.swift */,
 				5A92FFF529CCE00000714FAF /* KVTransactionalBuilder.swift */,
-				FF98A39929D160610032A6C9 /* TransactionalPresenter.swift */,
+				FF98A39929D160610032A6C9 /* KVTransactionalPresenter.swift */,
 				5A92FFF329CCD90000714FAF /* KVTransactionalInteractor.swift */,
+				5A7C940A29CB6BD200F2B631 /* KVContentView.swift */,
 			);
 			path = Transaction;
 			sourceTree = "<group>";
@@ -487,7 +487,7 @@
 				5A7C943A29CB6DD200F2B631 /* KVStoreService.swift in Sources */,
 				5A7056DE29CC00B800034264 /* TransactionModel.swift in Sources */,
 				5A7C944429CB7F1100F2B631 /* StringExtension.swift in Sources */,
-				FF98A39A29D160610032A6C9 /* TransactionalPresenter.swift in Sources */,
+				FF98A39A29D160610032A6C9 /* KVTransactionalPresenter.swift in Sources */,
 				5A7C940729CB6BD200F2B631 /* AppDelegate.swift in Sources */,
 				5A7056DA29CBF8F900034264 /* KVStackWorker.swift in Sources */,
 				5A7C940929CB6BD200F2B631 /* SceneDelegate.swift in Sources */,
@@ -496,7 +496,7 @@
 				5AC6632229CCEE9B0013DB75 /* TransactionErrorReason.swift in Sources */,
 				5A7C943829CB6D3B00F2B631 /* KVStoreModel.swift in Sources */,
 				5AE486AC29CDDEBA0082B436 /* KVStoreWorker.swift in Sources */,
-				5A7C940B29CB6BD200F2B631 /* ContentView.swift in Sources */,
+				5A7C940B29CB6BD200F2B631 /* KVContentView.swift in Sources */,
 				5AE486B029CDF5520082B436 /* TransactionMethods.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -720,7 +720,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = N3GG8VLR9P;
 				INFOPLIST_FILE = KeyValueStoreTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -742,7 +742,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = N3GG8VLR9P;
 				INFOPLIST_FILE = KeyValueStoreTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -763,6 +763,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = N3GG8VLR9P;
 				INFOPLIST_FILE = KeyValueStoreUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -783,6 +784,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = N3GG8VLR9P;
 				INFOPLIST_FILE = KeyValueStoreUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

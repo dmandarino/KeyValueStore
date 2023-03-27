@@ -10,25 +10,26 @@ import SwiftUI
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        KVContentView(presenter: KVTransactionalBuilder().build())
     }
 }
 
 struct TransactionalChanged: Identifiable {
-    var id: TransactionalMethod
+    var id = UUID()
+    var method: SelectedMethod
 }
 
-struct ContentView: View {
+//struct ContentView: View {
+struct KVContentView<T>: View where T: KVTransacionalModule {
     @State private var key = ""
     @State private var value = ""
     @State private var command = ""
+    @State private var showingAlert = false
+    @State private var givenResponse = ""
     @State private var transactionalMethod: TransactionalChanged?
-    
     @State private var selectionInputStyle = SelectionInputStyle.manually
-    @State private var preferredMethod = SelectionMethod.set
-    
-    @State private var favoriteColor = "Red"
-    var colors = ["Red", "Green", "Blue"]
+    @State private var preferredMethod = SelectedMethod.SET
+    @ObservedObject var presenter: T
     
     enum SelectionInputStyle {
         case manually, freeForm
@@ -36,6 +37,10 @@ struct ContentView: View {
     
     enum SelectionMethod {
         case set, get, delete, count
+    }
+    
+    init(presenter: T) {
+        self.presenter = presenter
     }
     
     var body: some View {
@@ -49,18 +54,18 @@ struct ContentView: View {
                 switch selectionInputStyle {
                 case .manually:
                     Picker("", selection: $preferredMethod) {
-                        Text("Set").tag(SelectionMethod.set)
-                        Text("Get").tag(SelectionMethod.get)
-                        Text("Delete").tag(SelectionMethod.delete)
-                        Text("Count").tag(SelectionMethod.count)
+                        Text("Set").tag(SelectedMethod.SET)
+                        Text("Get").tag(SelectedMethod.GET)
+                        Text("Delete").tag(SelectedMethod.DELETE)
+                        Text("Count").tag(SelectedMethod.COUNT)
                     }
                     .pickerStyle(SegmentedPickerStyle())
-                    if case .count = preferredMethod {
+                    if case .COUNT = preferredMethod {
                         TextField("Value", text: $value)
                     } else {
                         TextField("Key", text: $key)
                     }
-                    if case .set = preferredMethod {
+                    if case .SET = preferredMethod {
                         TextField("Value", text: $value)
                     }
                 case .freeForm:
@@ -68,28 +73,39 @@ struct ContentView: View {
                 }
             }
             Button("Submit", action: {
-                print("Submit button tapped")
+                presenter.execute(method: preferredMethod, key: key, value: value)
             })
             Section(header: Text("Transaction")) {
-                Button("BEGIN") {
-                    transactionalMethod = TransactionalChanged(id: .BEGIN)
+                Button(SelectedMethod.BEGIN.rawValue) {
+                    transactionalMethod = TransactionalChanged(method: .BEGIN)
                 }
-                Button("COMMIT") {
-                    transactionalMethod = TransactionalChanged(id: .COMMIT)
+                Button(SelectedMethod.COMMIT.rawValue) {
+                    transactionalMethod = TransactionalChanged(method: .COMMIT)
                 }
-                Button("ROLLBACK") {
-                    transactionalMethod = TransactionalChanged(id: .ROLLBACK)
+                Button(SelectedMethod.ROLLBACK.rawValue) {
+                    transactionalMethod = TransactionalChanged(method: .ROLLBACK)
                 }
-            }.alert(item: $transactionalMethod) { method in
-                let title = Text(method.id.rawValue)
+            }.alert(item: $transactionalMethod) { transaction in
+                let method = transaction.method
+                let title = Text(method.rawValue)
                 let messate = "Do you want to proceed?"
                 let alert = Alert(title: title,
+                                  message: Text(messate),
                              primaryButton: .default(Text("Continue")) {
-                    print("CONTINUAAAAAAA")
+                    presenter.execute(transaction: method)
                 },
                              secondaryButton: .destructive(Text("Cancel")))
                 return alert
             }
         }
+        VStack {
+            Text(presenter.response)
+//                .alert(item: $presenter.$response) { response in
+//                            Alert(title: Text("response"), dismissButton: .default())
+//                        }
+        }
+//        .alert(item: presenter.response) { response in
+//            Alert(title: Text("response"), dismissButton: .default())
+//        }
     }
 }

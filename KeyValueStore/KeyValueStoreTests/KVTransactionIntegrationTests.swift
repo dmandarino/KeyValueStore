@@ -12,11 +12,15 @@ import XCTest
 
 class KVTransactionIntegrationTests: XCTestCase {
     
-    var interactor: KVTransactionalInteractable?
+    var interactor: KVTransactionalInteractor?
     private let delegate = InteractorDelegateMock()
     
     override func setUp() {
-        interactor = KVTransactionalBuilder().build()
+        let storeService = KVStoreService(store: KVStoreModel())
+        let storeWorker = KVStoreWorker(service: storeService)
+        let stackWorker = KVStackWorker()
+        interactor = KVTransactionalInteractor(storeWorker: storeWorker, stackWorker: stackWorker)
+        storeWorker.delegate = interactor
         interactor?.delegate = delegate
     }
     

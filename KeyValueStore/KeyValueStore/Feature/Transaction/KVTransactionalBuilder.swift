@@ -8,13 +8,15 @@
 
 import Foundation
 
+typealias KVTransacionalModule = KVTransactionalPresentable
+
 protocol KVTransacionalDependencies {
     var kvStore: KVStore { get set }
     var kvStack: KVStack { get }
 }
 
 protocol KVTransactionalBuildable: KVTransacionalDependencies {
-    func build() -> KVTransactionalInteractable
+    func build() -> KVTransactionalPresenter
 }
 
 class KVTransactionalBuilder: KVTransactionalBuildable {
@@ -25,11 +27,11 @@ class KVTransactionalBuilder: KVTransactionalBuildable {
         KVStackBuilder.build()
     }
     
-    func build() -> KVTransactionalInteractable {
+    func build() -> KVTransactionalPresenter {
         let interactor = KVTransactionalInteractor(storeWorker: kvStore, stackWorker: kvStack)
         let presenter = KVTransactionalPresenter(interactor: interactor)
         kvStore.delegate = interactor
         interactor.delegate = presenter
-        return interactor
+        return presenter
     }
 }
