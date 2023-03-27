@@ -19,6 +19,7 @@ protocol KVStoreWorkable {
     func set(key: String, value: String)
     func delete(by key: String)
     func get(by key: String)
+    func count(for value: String)
     func getAll()
 }
 
@@ -51,7 +52,7 @@ final class KVStoreWorker: KVStoreWorkable {
     }
     
     func set(key: String, value: String) {
-        guard key.isNotEmpty || value.isNotEmpty else {
+        guard key.isNotEmpty && value.isNotEmpty else {
             delegate?.handleWithError(error: .emptyKey)
             return
         }
@@ -89,6 +90,16 @@ final class KVStoreWorker: KVStoreWorkable {
         switch operation {
         case .success(let result):
             delegate?.didGetAllTransactions(transactions: result)
+        case .failure(let error):
+            sendError(error: error)
+        }
+    }
+    
+    func count(for value: String) {
+        let operation = service.count(value: value)
+        switch operation {
+        case .success(let result):
+            delegate?.didGetValueForKey(value: "\(result)")
         case .failure(let error):
             sendError(error: error)
         }

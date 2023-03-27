@@ -6,8 +6,8 @@
 //  Copyright © 2023 Douglas Mandarino. All rights reserved.
 //
 
-//import KeyValueStore
-//
+import KeyValueStore
+
 //class KVTransactionServicingMock: KVTransactionServicing {
 //    var shouldPass: Bool = true
 //    var store: [String : String] = [:]

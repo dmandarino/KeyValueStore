@@ -207,5 +207,42 @@ class KVStoreWorkerTests: XCTestCase {
         XCTAssertEqual(delegate.handleWithErrorCallCount, 1)
         XCTAssertEqual(delegate.expectedError, .noStore)
     }
+    
+    //MARK: - COUNT
+
+    func test_count_shoulReturnNumberOfElements() {
+        //Given
+        serviceMock.items = ["foo":"123", "bar":"abc", "blz":"abc"]
+        serviceMock.expectedCount = 2
+        worker = KVStoreWorker(service: serviceMock)
+        worker?.delegate = delegate
+
+        //When
+        worker?.count(for: "abc")
+        
+        //Then
+        XCTAssertEqual(serviceMock.countCallCount, 1)
+        XCTAssertEqual(delegate.didGetValueForKeyCallCount, 1)
+        XCTAssertEqual(delegate.expectedValue, "2")
+    }
+    
+    func test_countWhenFails_shoulReturnNotFoundError() {
+        //Given
+        serviceMock.items = ["foo":"123", "bar":"abc", "blz":"abc"]
+        serviceMock.expectedCount = 2
+        serviceMock.error = .keyNotFound
+        serviceMock.shouldFail = true
+        worker = KVStoreWorker(service: serviceMock)
+        worker?.delegate = delegate
+
+        //When
+        worker?.count(for: "abc")
+        
+        //Then
+        XCTAssertEqual(serviceMock.countCallCount, 1)
+        XCTAssertEqual(delegate.didGetValueForKeyCallCount, 0)
+        XCTAssertEqual(delegate.expectedError, .keyNotFound)
+        XCTAssertEqual(delegate.expectedValue, "")
+    }
 }
 

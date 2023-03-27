@@ -10,19 +10,29 @@
 
 class KVStoreWorkerMock: KVStoreWorkable {
     var store: [String: String] = [:]
+    var expectedStore: [String: String] = [:]
+    var expectedValue = ""
+    var shouldFail = false
     
     var updateStoreCallCount = 0
     var setCallCount = 0
     var deleteCallCount = 0
-    var findCallCount = 0
-    var findAllElementsCallCount = 0
+    var getCallCount = 0
+    var getAllCallCount = 0
+    var countCallCount = 0
     
     func updateStore(with transactions: [String : String]) {
         updateStoreCallCount += 1
+        if !shouldFail {
+            store = transactions
+        }
     }
     
     func set(key: String, value: String) {
         setCallCount += 1
+        if !shouldFail {
+            store[key] = value
+        }
     }
     
     func delete(by key: String) {
@@ -30,10 +40,14 @@ class KVStoreWorkerMock: KVStoreWorkable {
     }
     
     func get(by key: String) {
-        findCallCount += 1
+        getCallCount += 1
     }
     
     func getAll() {
-        findAllElementsCallCount += 1
+        getAllCallCount += 1
+    }
+    
+    func count(for value: String) {
+        countCallCount += 1
     }
 }

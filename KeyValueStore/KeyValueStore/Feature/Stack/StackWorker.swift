@@ -8,20 +8,19 @@
 
 import Foundation
 
-enum StackError: Error {
-    case noTransaction
-}
-
 protocol KVStackWorkable {
     func begin(transientTransaction: [String : String])
-    func commit() -> Result<KVTransaction, StackError>
-    func rollback() -> Result<Void, StackError>
-    func updateTransaction(item: [String : String])
+    func commit() -> Result<KVTransaction, TransactionErrorReason>
+    func rollback() -> Result<Void, TransactionErrorReason>
+    func updateTransaction(items: [String : String])
 }
 
 class KVStackWorker: KVStackWorkable {
 
+    // MARK: - Private Variables
     private(set) var transactions: [KVTransaction] = []
+    
+    // MARK: - Init
     
     init() {}
     
@@ -30,12 +29,14 @@ class KVStackWorker: KVStackWorkable {
         self.transactions = transactions
     }
     
+    // MARK: - KVStackWorkable
+    
     func begin(transientTransaction: [String : String]) {
         let transaction = KVTransaction(items: transientTransaction)
         transactions.append(transaction)
     }
     
-    func commit() -> Result<KVTransaction, StackError> {
+    func commit() -> Result<KVTransaction, TransactionErrorReason> {
         guard let transaction = removeLastTransaction() else {
             return .failure(.noTransaction)
         }
@@ -45,19 +46,19 @@ class KVStackWorker: KVStackWorkable {
         return .success(transaction)
     }
     
-    func rollback() -> Result<Void, StackError> {
+    func rollback() -> Result<Void, TransactionErrorReason> {
         guard removeLastTransaction() != nil else {
             return .failure(.noTransaction)
         }
         return .success(())
     }
     
-    func updateTransaction(item: [String : String]) {
+    func updateTransaction(items: [String : String]) {
         guard !transactions.isEmpty else { return }
-        transactions.last?.updateItems(with: item)
+        transactions.last?.updateItems(with: items)
     }
     
-    // MARK: - Private
+    // MARK: - Private Methods
     
     private func removeLastTransaction() -> KVTransaction? {
         guard !transactions.isEmpty else {

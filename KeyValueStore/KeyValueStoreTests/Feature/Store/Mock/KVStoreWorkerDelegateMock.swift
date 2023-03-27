@@ -13,12 +13,12 @@ final class KVStoreWorkerDelegateMock: KVStoreWorkerDelegate {
     var expectedValue = ""
     var expectedTransactions: [String: String] = [:]
     
-    var didGetValueForKey = 0
+    var didGetValueForKeyCallCount = 0
     var didGetAllTransactionsCallCount = 0
     var handleWithErrorCallCount = 0
     
     func didGetValueForKey(value: String) {
-        didGetValueForKey += 1
+        didGetValueForKeyCallCount += 1
         expectedValue = value
     }
     

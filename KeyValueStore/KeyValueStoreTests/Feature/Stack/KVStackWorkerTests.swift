@@ -92,7 +92,7 @@ class KVStackWorkerTests: XCTestCase {
     func test_commitWhenThereIsNoTransaction_shouldReturnTransaction() {
         //Given
         XCTAssertTrue((worker?.transactions.isEmpty)!)
-        var error: StackError?
+        var error: TransactionErrorReason?
         
         //When
         let result = worker?.commit()
@@ -158,7 +158,7 @@ class KVStackWorkerTests: XCTestCase {
         XCTAssertEqual(worker?.transactions.first!.items, transaction.items)
         
         //When
-        worker?.updateTransaction(item: ["abc" : "123"])
+        worker?.updateTransaction(items: ["abc" : "123"])
         
         //Then
         XCTAssertEqual(worker?.transactions.count, 1)
@@ -174,44 +174,11 @@ class KVStackWorkerTests: XCTestCase {
         XCTAssertEqual(worker?.transactions.last!.items, ["xpto" : "123"])
         
         //When
-        worker?.updateTransaction(item: ["abc" : "123"])
+        worker?.updateTransaction(items: ["abc" : "123"])
         
         //Then
         XCTAssertEqual(worker?.transactions.count, 2)
         XCTAssertEqual(worker?.transactions.first!.items, ["foo" : "bar"])
         XCTAssertEqual(worker?.transactions.last!.items, ["abc" : "123"])
     }
-    
-    
-//    func test_updateStore_shoulAddNewTrasactions() {
-//        //Given
-//        storeMock = KVStoreMock(items: ["foo":"123", "bar":"456"])
-//        service = KVStoreService(store: storeMock)
-//        let items = ["blz":"abc", "xpto":"456"]
-//
-//        //When
-//        guard case .success(_) = service?.updateStore(items: items) else {
-//            XCTFail()
-//            return
-//        }
-//
-//        //Then
-//        XCTAssertEqual(storeMock.updateStoreCallCount, 1)
-//        XCTAssertEqual(storeMock.getStoreCallCount, 1)
-//    }
-//
-//    func test_updateStore_shoulMergeNewTrasactions() {
-//        //Given
-//        storeMock = KVStoreMock(items: ["foo":"123", "bar":"456"])
-//        service = KVStoreService(store: storeMock)
-//        let transactions = ["foo":"abc", "xpto":"456"]
-//
-//        //When
-//        service?.updateStore(with: transactions)
-//
-//        //Then
-//        XCTAssertEqual(storeMock.items, ["foo":"abc", "bar":"456", "xpto":"456"])
-//        XCTAssertEqual(storeMock.updateStoreCallCount, 1)
-//        XCTAssertEqual(storeMock.getStoreCallCount, 1)
-//    }
 }

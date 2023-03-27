@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum TransactionErrorReason {
+enum TransactionErrorReason: Error {
     case keyNotFound
     case emptyParameters
     case emptyKey
