@@ -20,6 +20,7 @@ class KVStackWorkerMock: KVStackWorkable {
     var commitCallCount = 0
     var rollbackCallCount = 0
     var updateTransactionCallCount = 0
+    var clearAllCallCount = 0
     
     func begin(transientTransaction: [String : String]) {
         beginCallCount += 1
@@ -43,4 +44,9 @@ class KVStackWorkerMock: KVStackWorkable {
             self.transaction = transaction
         }
     }
+    
+    func clearAll() {
+        clearAllCallCount += 1
+    }
+    
 }

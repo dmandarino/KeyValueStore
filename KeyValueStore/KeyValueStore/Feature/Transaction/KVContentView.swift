@@ -104,10 +104,11 @@ struct KVContentView<T>: View where T: KVTransacionalModule {
                 let messate = "Do you want to proceed?"
                 let alert = Alert(title: title,
                                   message: Text(messate),
-                                  primaryButton: .destructive(Text("Cancel")) {
+                                  primaryButton: .destructive(Text("Cancel")),
+                                  secondaryButton: .default(Text("Continue")) {
                     presenter.execute(transaction: method)
-                },
-                                  secondaryButton: .default(Text("Continue")))
+                }
+                )
                 return alert
             }
             Section(header: Text("Stack Trace")) {
