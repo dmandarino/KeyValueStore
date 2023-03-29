@@ -39,6 +39,7 @@ class KVTransactionalPresenter: ObservableObject, KVTransactionalPresentable, KV
     // MARK: - KVTransactionalPresentable
     
     func execute(transaction: SelectedMethod) {
+        updateStackTrace(info: "> \(transaction.rawValue)")
         switch transaction {
         case .BEGIN:
             interactor.begin()
@@ -49,7 +50,6 @@ class KVTransactionalPresenter: ObservableObject, KVTransactionalPresentable, KV
         default:
             return
         }
-        updateStackTrace(info: "> \(transaction.rawValue)")
     }
     
     func execute(method: SelectedMethod, key: String = "", value: String = "") {
