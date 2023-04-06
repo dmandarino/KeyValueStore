@@ -45,13 +45,14 @@ final class KVTransactionalInteractor: KVTransactionalInteractable {
     
     // MARK: - KVTransactInteractable
     
+
     func set(key: String, value: String) {
         guard key.isNotEmpty && value.isNotEmpty else {
             delegate?.presentError(error: .emptyParameters)
             return
         }
+        updateCommandTransactionalStack(key: key)
         storeWorker.set(key: key, value: value)
-        updateTransactionalStack()
     }
     
     func delete(key: String) {
@@ -59,10 +60,10 @@ final class KVTransactionalInteractor: KVTransactionalInteractable {
             delegate?.presentError(error: .emptyKey)
             return
         }
+        updateCommandTransactionalStack(key: key)
         storeWorker.delete(by: key)
-        updateTransactionalStack()
     }
-    
+
     func get(key: String) {
         guard key.isNotEmpty  else {
             delegate?.presentError(error: .emptyKey)
@@ -78,51 +79,61 @@ final class KVTransactionalInteractor: KVTransactionalInteractable {
         }
         storeWorker.count(for: value)
     }
-    
+
     func clearAll() {
         storeWorker.overrideStore(with: [:])
         stackWorker.clearAll()
     }
 
     // MARK: - Stack
-
+    
+    func begin() {
+        stackWorker.begin()
+    }
+    
     func commit() {
         let result = stackWorker.commit()
-        switch result {
-        case .success(let transaction):
-            storeWorker.updateStore(with: transaction.items)
-        case .failure(_):
-            delegate?.presentError(error: .noTransaction)
-        }
-    }
-
-    func begin() {
-        guard let transient = storeWorker.getAll() else {
-            delegate?.presentError(error: .noStore)
-            return
-        }
-        stackWorker.begin(transientTransaction: transient)
-    }
-
-    func rollback() {
-        let result = stackWorker.rollback()
-        switch result {
-        case .success(let transaction):
-            guard let transaction else { return }
-            storeWorker.overrideStore(with: transaction.items)
-        case .failure(let error):
+        if case .failure(let error) = result {
             delegate?.presentError(error: error)
         }
     }
     
-    // MARK: - Private Methods
+    func rollback() {
+        let result = stackWorker.rollback()
+        switch result {
+        case .success(let transaction):
+            guard let transaction else {
+                delegate?.presentError(error: .noTransaction)
+                return
+            }
+            rollbackCommands(transaction: transaction)
+        case .failure(let error):
+            delegate?.presentError(error: error)
+        }
+    }
+
+    private func rollbackCommands(transaction: KVTransactionModel) {
+        let commands = transaction.commands
+        for command in commands {
+            if let value = command.value {
+                set(key: command.key, value: value)
+            } else {
+                delete(key: command.key)
+            }
+        }
+    }
     
-    private func updateTransactionalStack() {
-        guard let transient = storeWorker.getAll() else {
-            delegate?.presentError(error: .noStore)
+    // MARK: - Private Methods
+
+    private func updateCommandTransactionalStack(key: String) {
+        guard let stored = storeWorker.getAll() else {
             return
         }
-        stackWorker.updateTransaction(items: transient)
+        if let oldValue = stored[key] {
+            stackWorker.addCommand(key: key, oldValue: oldValue)
+        } else {
+            stackWorker.addCommand(key: key, oldValue: nil)
+        }
     }
 }
 

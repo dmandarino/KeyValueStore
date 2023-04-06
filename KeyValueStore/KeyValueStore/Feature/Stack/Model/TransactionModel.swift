@@ -8,27 +8,36 @@
 
 import Foundation
 
+struct Transactional: Equatable {
+    var key: String
+    var value: String?
+}
+
 protocol KVTransactional {
-    var items: [String : String] { get }
+    var commands: [Transactional] { get }
     
-    func updateItems(with items: [String : String])
+    func updateCommands(key: String, value: String?)
 }
 
 class KVTransactionModel: KVTransactional {
     
-    var items: [String : String]
+    var commands: [Transactional]
     
-    init(items: [String : String] = [:]) {
-        self.items = items
+    init(commands: [Transactional] = []) {
+        self.commands = commands
     }
     
-    func updateItems(with items: [String : String]) {
-        self.items = items
+    func updateCommands(key: String, value: String?) {
+        let command = Transactional(key: key, value: value)
+        self.commands.insert(command, at: 0)
     }
 }
 
 extension KVTransactionModel: Equatable {
     static func == (lhs: KVTransactionModel, rhs: KVTransactionModel) -> Bool {
-        lhs.items == rhs.items
+        if lhs.commands.count == rhs.commands.count, lhs.commands == rhs.commands {
+            return true
+        }
+        return false
     }
 }

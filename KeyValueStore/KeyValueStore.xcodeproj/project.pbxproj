@@ -11,7 +11,6 @@
 		5A7056D029CB8C3500034264 /* KVStoreError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7056CF29CB8C3500034264 /* KVStoreError.swift */; };
 		5A7056D429CBB1BF00034264 /* KVSExamplesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7056D329CBB1BF00034264 /* KVSExamplesTests.swift */; };
 		5A7056D829CBF72000034264 /* StackModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7056D729CBF72000034264 /* StackModel.swift */; };
-		5A7056DA29CBF8F900034264 /* KVStackWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7056D929CBF8F900034264 /* KVStackWorker.swift */; };
 		5A7056DC29CBF92900034264 /* KVStoreServicing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7056DB29CBF92900034264 /* KVStoreServicing.swift */; };
 		5A7056DE29CC00B800034264 /* TransactionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7056DD29CC00B800034264 /* TransactionModel.swift */; };
 		5A7C940729CB6BD200F2B631 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7C940629CB6BD200F2B631 /* AppDelegate.swift */; };
@@ -36,6 +35,7 @@
 		5AE486AE29CDE9DA0082B436 /* KVStoreServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AE486AD29CDE9DA0082B436 /* KVStoreServiceTests.swift */; };
 		5AE486B029CDF5520082B436 /* TransactionMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AE486AF29CDF5520082B436 /* TransactionMethods.swift */; };
 		5AF8F6B529CE4CD100300BD5 /* KVStoreWorkerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AF8F6B429CE4CD100300BD5 /* KVStoreWorkerMock.swift */; };
+		FF5F70C329DE6E9700BE3183 /* KVStackWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF5F70C229DE6E9700BE3183 /* KVStackWorker.swift */; };
 		FF98A38E29D106890032A6C9 /* KVStoreWorkerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF98A38D29D106890032A6C9 /* KVStoreWorkerTests.swift */; };
 		FF98A39029D106ED0032A6C9 /* KVStoreServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF98A38F29D106ED0032A6C9 /* KVStoreServiceMock.swift */; };
 		FF98A39229D109590032A6C9 /* KVStoreWorkerDelegateMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF98A39129D109590032A6C9 /* KVStoreWorkerDelegateMock.swift */; };
@@ -66,7 +66,6 @@
 		5A7056CF29CB8C3500034264 /* KVStoreError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KVStoreError.swift; sourceTree = "<group>"; };
 		5A7056D329CBB1BF00034264 /* KVSExamplesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KVSExamplesTests.swift; sourceTree = "<group>"; };
 		5A7056D729CBF72000034264 /* StackModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackModel.swift; sourceTree = "<group>"; };
-		5A7056D929CBF8F900034264 /* KVStackWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KVStackWorker.swift; sourceTree = "<group>"; };
 		5A7056DB29CBF92900034264 /* KVStoreServicing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KVStoreServicing.swift; sourceTree = "<group>"; };
 		5A7056DD29CC00B800034264 /* TransactionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionModel.swift; sourceTree = "<group>"; };
 		5A7C940329CB6BD200F2B631 /* KeyValueStore.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KeyValueStore.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -97,6 +96,7 @@
 		5AE486AD29CDE9DA0082B436 /* KVStoreServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KVStoreServiceTests.swift; sourceTree = "<group>"; };
 		5AE486AF29CDF5520082B436 /* TransactionMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionMethods.swift; sourceTree = "<group>"; };
 		5AF8F6B429CE4CD100300BD5 /* KVStoreWorkerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = KVStoreWorkerMock.swift; path = ../../Transactional/Mock/KVStoreWorkerMock.swift; sourceTree = "<group>"; };
+		FF5F70C229DE6E9700BE3183 /* KVStackWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KVStackWorker.swift; sourceTree = "<group>"; };
 		FF98A38D29D106890032A6C9 /* KVStoreWorkerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KVStoreWorkerTests.swift; sourceTree = "<group>"; };
 		FF98A38F29D106ED0032A6C9 /* KVStoreServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KVStoreServiceMock.swift; sourceTree = "<group>"; };
 		FF98A39129D109590032A6C9 /* KVStoreWorkerDelegateMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KVStoreWorkerDelegateMock.swift; sourceTree = "<group>"; };
@@ -321,7 +321,7 @@
 		FFDD1A7329D087090094102D /* Stack */ = {
 			isa = PBXGroup;
 			children = (
-				5A7056D929CBF8F900034264 /* KVStackWorker.swift */,
+				FF5F70C229DE6E9700BE3183 /* KVStackWorker.swift */,
 				FFDD1A7429D0880B0094102D /* Model */,
 				FF98A39529D1589C0032A6C9 /* KVStackBuilder.swift */,
 			);
@@ -477,6 +477,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FF98A39629D1589C0032A6C9 /* KVStackBuilder.swift in Sources */,
+				FF5F70C329DE6E9700BE3183 /* KVStackWorker.swift in Sources */,
 				5A7056D029CB8C3500034264 /* KVStoreError.swift in Sources */,
 				5A7056D829CBF72000034264 /* StackModel.swift in Sources */,
 				5A92FFF629CCE00000714FAF /* KVTransactionalBuilder.swift in Sources */,
@@ -486,7 +487,6 @@
 				5A7C944429CB7F1100F2B631 /* StringExtension.swift in Sources */,
 				FF98A39A29D160610032A6C9 /* KVTransactionalPresenter.swift in Sources */,
 				5A7C940729CB6BD200F2B631 /* AppDelegate.swift in Sources */,
-				5A7056DA29CBF8F900034264 /* KVStackWorker.swift in Sources */,
 				5A7C940929CB6BD200F2B631 /* SceneDelegate.swift in Sources */,
 				5A92FFF429CCD90000714FAF /* KVTransactionalInteractor.swift in Sources */,
 				FF98A39829D15AFB0032A6C9 /* KVStoreBuilder.swift in Sources */,
