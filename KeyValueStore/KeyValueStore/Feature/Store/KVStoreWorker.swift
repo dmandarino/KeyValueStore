@@ -16,12 +16,12 @@ protocol KVStoreWorkerDelegate: AnyObject {
 protocol KVStoreWorkable {
     var delegate: KVStoreWorkerDelegate? { get set }
     func updateStore(with transactions: [String: String])
-    func overrideStore(with transactions: [String: String])
     func set(key: String, value: String)
     func delete(by key: String)
     func get(by key: String)
     func count(for value: String)
     func getAll() -> [String : String]?
+    func clearStore()
 }
 
 final class KVStoreWorker: KVStoreWorkable {
@@ -52,16 +52,8 @@ final class KVStoreWorker: KVStoreWorkable {
         }
     }
     
-    func overrideStore(with transactions: [String: String]) {
-        let result = service.getAll()
-        switch result {
-        case .success(_):
-            if case let .failure(error) = service.updateStore(items: transactions) {
-                sendError(error: error)
-            }
-        case .failure(let error):
-            sendError(error: error)
-        }
+    func clearStore() {
+        service.clearStore()
     }
     
     func set(key: String, value: String) {

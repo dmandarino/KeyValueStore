@@ -79,6 +79,15 @@ final class KVStoreService: KVStoreServicing {
         return .success(stored)
     }
     
+    func clearStore() -> Result<Void, KVStoreError> {
+        kvStore.clearStore()
+        guard let store = kvStore.getStore(), store.isEmpty else {
+            return .failure(.noStore)
+        }
+        return .success(())
+    }
+    
+    
     // MARK: - Private Methods
     
     private func updateLocalStore(data: [String: String]) -> Result<Void, KVStoreError> {

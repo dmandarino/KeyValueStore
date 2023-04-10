@@ -81,7 +81,7 @@ final class KVTransactionalInteractor: KVTransactionalInteractable {
     }
 
     func clearAll() {
-        storeWorker.overrideStore(with: [:])
+        storeWorker.clearStore()
         stackWorker.clearAll()
     }
 

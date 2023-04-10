@@ -16,6 +16,7 @@ protocol KVStoring {
     func getStore() -> [String : String]?
     func getValue(by key: String) -> String?
     func delete(by key: String) -> String?
+    func clearStore()
 }
 
 final class KVStoreModel: KVStoring {
@@ -45,4 +46,9 @@ final class KVStoreModel: KVStoring {
         }
         return item
     }
+    
+    func clearStore() {
+        self.items = [:]
+    }
+    
 }

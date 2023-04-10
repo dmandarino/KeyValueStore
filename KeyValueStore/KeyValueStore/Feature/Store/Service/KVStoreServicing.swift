@@ -19,4 +19,5 @@ public protocol KVStoreServicing {
     func count(value: String) -> Result<Int, KVStoreError>
     func updateStore(items: [String : String]) -> Result<Void, KVStoreError>
     func getAll() -> Result<[String : String], KVStoreError>
+    func clearStore() -> Result<Void, KVStoreError>
 }

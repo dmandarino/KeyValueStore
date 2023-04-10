@@ -53,7 +53,7 @@ class KVStoreWorkerMock: KVStoreWorkable {
         countCallCount += 1
     }
     
-    func overrideStore(with transactions: [String : String]) {
+    func clearStore(with transactions: [String : String]) {
         
     }
     
